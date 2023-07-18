@@ -343,7 +343,7 @@
                      <a class="dropdown-item" href="#">Material  Requisition</a>
                   </li>
                 </ul> 
-              </li>
+              </li> 
               
               <li>
                 <a class="dropdown-item" href="#"> Sales</a>
