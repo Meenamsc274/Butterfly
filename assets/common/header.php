@@ -324,9 +324,27 @@
           Transactions &raquo;
             </a>
             <ul class="dropdown-menu scrollable-menu dropdown-submenu">
-              <li>
-                <a class="dropdown-item" href="#"> Purchases</a>
+			<li>
+                <a class="dropdown-item" href="#"> Purchases &raquo; </a>
+                <ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  <li>
+                    <a class="dropdown-item" href="#">Shortage In Stocks</a>
+                  </li>
+                  <li>
+                     <a class="dropdown-item" href="#">Exceses In Stocks</a>
+                  </li>
+				     <li>
+                     <a class="dropdown-item" href="#">Stock Transfers</a>
+                  </li>
+				     <li>
+                     <a class="dropdown-item" href="#">Opening Stocks</a>
+                  </li>
+				    <li>
+                     <a class="dropdown-item" href="#">Material  Requisition</a>
+                  </li>
+                </ul>
               </li>
+              
               <li>
                 <a class="dropdown-item" href="#"> Sales</a>
               </li>
