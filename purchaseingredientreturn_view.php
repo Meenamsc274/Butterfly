@@ -3,10 +3,10 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "purchaseorder_view"; ?>
+$page = "purchaseingredientreturn_view"; ?>
 <?php if($_GET['del'] == "yes"){
-	$purchaseorder_id = $_GET['purchaseorder_id'];
-    if(mysqli_query($link,"delete from `purchaseorder_tbl` where `purchaseorder_id`='$purchaseorder_id'")){
+	$return_id = $_GET['return_id'];
+    if(mysqli_query($link,"delete from `purchaseingredientreturn_tbl` where `return_id`='$return_id'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
@@ -35,12 +35,12 @@ $page = "purchaseorder_view"; ?>
             		<div class="box">
 	              		<div class="box-header">
 	              			<div class="row">
-	              				<div class="col-lg-6"><h3 class="box-heading"> Purchase Order <small>View Details</small></h3> </div>
+	              				<div class="col-lg-6"><h3 class="box-heading"> Purchase Ingredient Return <small>View Details</small></h3> </div>
 	              				<div class="col-lg-6">
 	              					<div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Purchase Order </a> 
+		              					<a href="#" class="breadcrumb_a">Purchase Ingredient Return Details </a> 
 	              					</div>
 	              				</div>
 	              			</div>
@@ -50,9 +50,13 @@ $page = "purchaseorder_view"; ?>
                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
                 <tr>
-		        <th>Id</th>
+                <th>Id</th>
+					<th>Return Id</th>
+					<th>Return Date</th>
 					<th>PO Number</th>
 					<th>PO Date</th>
+					<th>Invoice No</th>
+					<th>Invoice Date</th>
 					<th>Vendor</th>
 					<th>Financial Year</th>
 					<th>Total Tax</th>
@@ -64,7 +68,6 @@ $page = "purchaseorder_view"; ?>
 					<th>Description</th>
 					<th>Company</th>
 					<th>Branch</th>
-					<th>Purchase Order Id</th>
 					<th>Total Line Items</th>
 					<th>Total Qty</th>
 					<th>Total Line Discount Amount</th>
@@ -81,14 +84,18 @@ $page = "purchaseorder_view"; ?>
                 </thead>
                 <tbody>
         <?php
-        $sel_rw = mysqli_query($link,"select * from purchaseorder_tbl");
+        $sel_rw = mysqli_query($link,"select * from purchaseingredientreturn_tbl");
         while($row = mysqli_fetch_object($sel_rw)){
         ?>
 
                 <tr>
                 <td><?php echo $row->id; ?></td>
+					<td><?php echo $row->return_id; ?></td>
+					<td><?php echo $row->return_date; ?></td>
 					<td><?php echo $row->po_no; ?></td>
 					<td><?php echo $row->po_date; ?></td>
+					<td><?php echo $row->invoice_no; ?></td>
+					<td><?php echo $row->invoice_date; ?></td>
 					<td><?php echo get_vendor($row->vendor_id); ?></td>
 					<td><?php echo $row->financial_year; ?></td>
 					<td><?php echo $row->total_tax; ?></td>
@@ -100,7 +107,6 @@ $page = "purchaseorder_view"; ?>
 					<td><?php echo $row->description; ?></td>
 					<td><?php echo get_company($row->company_id); ?></td>
 					<td><?php echo get_branch($row->branch_id); ?></td>
-					<td><?php echo $row->purchaseorder_id; ?></td>
 					<td><?php echo $row->total_lineitems; ?></td>
 					<td><?php echo $row->total_qty; ?></td>
 					<td><?php echo $row->total_linediscount; ?></td>
@@ -113,9 +119,9 @@ $page = "purchaseorder_view"; ?>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>
 					<td>
-						<a href="purchaseorderdetails_add.php?purchaseorder_id=<?php echo $row->purchaseorder_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="purchaseorder.php?po_no=<?php echo $row->po_no; ?>" title="Purchase Order Invoice"><i class="fa fa-eye"></i></a>
-						<a href="purchaseorder_view.php?purchaseorder_id=<?php echo $row->purchaseorder_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
+						<a href="purchaseingredientreturn_add.php?return_id=<?php echo $row->return_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="purchaseingredientreturninvoice.php?invoice_no=<?php echo $row->invoice_no; ?>" title="Purchase Ingredient Return Invoice"><i class="fa fa-eye"></i></a>
+						<a href="purchaseingredientreturn_view.php?return_id=<?php echo $row->return_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>
         </tr>
         <?php } ?>

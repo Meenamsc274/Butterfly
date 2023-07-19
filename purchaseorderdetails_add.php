@@ -10,11 +10,13 @@ if($_POST['submit'] == "Submit"){
     $company_id =  mysqli_real_escape_string($link,$_POST['company_id']);
     $branch_id =  mysqli_real_escape_string($link,$_POST['branch_id']);
     $purchaseorder_id =  mysqli_real_escape_string($link,$_POST['purchaseorder_id']);
-    $max_id = $db->maxOfAll("id","purchaseorder_tbl");
+    $max_id = maxOfAll("id","purchaseorder_tbl");
     $max_id=$max_id+1;
     $purchaseorder_id="pur-".$max_id;	
     $po_no =  mysqli_real_escape_string($link,$_POST['po_no']);
+    
     require("barcode.inc.php");
+    
     $type = "png";
     $rand = rand();
     $file = "barcode/purchaseorder/$purchaseorder_id"."_".date("d-m-Y")."_".$rand;
@@ -49,7 +51,7 @@ if($_POST['submit'] == "Submit"){
     $balance_amount =  mysqli_real_escape_string($link,$_POST['balance_amount']);
     $description =  mysqli_real_escape_string($link,$_POST['description']);
     $payment_id =  mysqli_real_escape_string($link,$_POST['payment_id']);
-    $max_id = $db->maxOfAll("id","payment_tbl");
+    $max_id = maxOfAll("id","payment_tbl");
     $max_id=$max_id+1;
     $payment_id="pay-".$max_id;
     $sort_order =  mysqli_real_escape_string($link,$_POST['sort_order']);
@@ -61,7 +63,7 @@ if($_POST['submit'] == "Submit"){
     $product_id1 = $_POST['product_id'];
     $i=0;
     foreach($product_id1 as $product_id2){
-    $max_id = $db->maxOfAll("id","purchaseorderdetails_tbl");
+    $max_id = maxOfAll("id","purchaseorderdetails_tbl");
     $max_id=$max_id+1;
     $purchaseorderdetails_id="pd-".$max_id;	
     $product_id =  mysqli_real_escape_string($link,$_POST['product_id'][$i]);
@@ -127,7 +129,7 @@ if($_POST['submit'] == "Submit"){
     $product_id1 = $_POST['product_id'];
     $i=0;
     foreach($product_id1 as $product_id2){
-    $max_id = $db->maxOfAll("id","purchaseorderdetails_tbl");
+    $max_id = maxOfAll("id","purchaseorderdetails_tbl");
     $max_id=$max_id+1;
     $purchaseorderdetails_id="pd-".$max_id;		
     $product_id =  mysqli_real_escape_string($link,$_POST['product_id'][$i]);
@@ -579,6 +581,7 @@ function get_product(){
 			var count = $('#'+product_id).length;
 			if(count < 1){
 				var i = $('.purchaseorder_details').length;
+                
 				addrow(i,product_id,productcode,product_name,barcode,unit,tax,price_changeable,stockable);
 			}
 			else
@@ -693,8 +696,8 @@ function update_total(){
 }
 
 </script>
-<script type="text/javascript" src="dist/js/purchaseorderdetails_tbl.js"></script>
-<script type="text/javascript" src="dist/js/jquery.autocomplete.js"></script>
-<script type="text/javascript" src="dist/js/jquery-dynamic-form.js"></script>
+<script type="text/javascript" src="assets/js/purchaseorderdetails_tbl.js"></script>
+<script type="text/javascript" src="assets/js/jquery.autocomplete.js"></script>
+<script type="text/javascript" src="assets/js/jquery-dynamic-form.js"></script>
  
 </html>

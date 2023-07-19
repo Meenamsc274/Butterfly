@@ -3,10 +3,10 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "purchaseorder_view"; ?>
+$page = "purchaseingredient_view"; ?>
 <?php if($_GET['del'] == "yes"){
-	$purchaseorder_id = $_GET['purchaseorder_id'];
-    if(mysqli_query($link,"delete from `purchaseorder_tbl` where `purchaseorder_id`='$purchaseorder_id'")){
+	$purchaseingredient_id = $_GET['purchaseingredient_id'];
+    if(mysqli_query($link,"delete from `purchase_tbl` where `purchaseingredient_id`='$purchaseingredient_id'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
@@ -35,12 +35,12 @@ $page = "purchaseorder_view"; ?>
             		<div class="box">
 	              		<div class="box-header">
 	              			<div class="row">
-	              				<div class="col-lg-6"><h3 class="box-heading"> Purchase Order <small>View Details</small></h3> </div>
+	              				<div class="col-lg-6"><h3 class="box-heading"> Purchase Ingredient <small>View Details</small></h3> </div>
 	              				<div class="col-lg-6">
 	              					<div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Purchase Order </a> 
+		              					<a href="#" class="breadcrumb_a">Purchase Ingredient Details </a> 
 	              					</div>
 	              				</div>
 	              			</div>
@@ -51,26 +51,35 @@ $page = "purchaseorder_view"; ?>
                 <thead>
                 <tr>
 		        <th>Id</th>
+					<th>Purchase Details Id</th>
+					<th>Company Id</th>
+					<th>Branch Id</th>
+					<th>Purchase Id</th>
+					<th>Purchase Date</th>
 					<th>PO Number</th>
 					<th>PO Date</th>
-					<th>Vendor</th>
-					<th>Financial Year</th>
-					<th>Total Tax</th>
-					<th>Sub Total</th>
-					<th>Grand Total</th>
-					<th>Paid Amount</th>
-					<th>Payment Id</th>
-					<th>Balance Amount</th>
-					<th>Description</th>
-					<th>Company</th>
-					<th>Branch</th>
-					<th>Purchase Order Id</th>
-					<th>Total Line Items</th>
-					<th>Total Qty</th>
-					<th>Total Line Discount Amount</th>
-					<th>Overall Discount Flat Rate</th>
-					<th>Overall Discount Percentage</th>
-					<th>Overall Discount Total</th>
+					<th>Invoice No</th>
+					<th>Invoice Date</th>
+					<th>Vendor Code</th>
+					<th>Vendor Name</th>
+					<th>Ingredient Id</th>
+					<th>Ingredient Code</th>
+					<th>Barcode</th>
+					<th>Ingredient Name</th>
+					<th>Qty</th>
+					<th>Rate</th>
+					<th>Unit</th>
+					<th>Line Discount Type</th>
+					<th>Line Discount Value</th>
+					<th>MRP Price</th>
+					<th>Cost Price</th>
+					<th>Selling Price</th>
+					<th>Wholesale Price</th>
+					<th>Tax</th>
+					<th>Batch No</th>
+					<th>Expiry Date</th>
+					<th>Sort Order</th>
+					<th>Status</th>
 					<th>IP Address</th>
 					<th>Browser</th>
 					<th>Date</th>
@@ -81,41 +90,49 @@ $page = "purchaseorder_view"; ?>
                 </thead>
                 <tbody>
         <?php
-        $sel_rw = mysqli_query($link,"select * from purchaseorder_tbl");
+        $sel_rw = mysqli_query($link,"select * from purchaseingredient_tbl");
         while($row = mysqli_fetch_object($sel_rw)){
         ?>
 
                 <tr>
                 <td><?php echo $row->id; ?></td>
+					<td><?php echo $row->purchaseingredient_id; ?></td>
+					<td><?php echo $row->company_id; ?></td>
+					<td><?php echo $row->branch_id; ?></td>
+					<td><?php echo $row->purchase_id; ?></td>
+					<td><?php echo $row->purchase_date; ?></td>
 					<td><?php echo $row->po_no; ?></td>
 					<td><?php echo $row->po_date; ?></td>
-					<td><?php echo get_vendor($row->vendor_id); ?></td>
-					<td><?php echo $row->financial_year; ?></td>
-					<td><?php echo $row->total_tax; ?></td>
-					<td><?php echo $row->sub_total; ?></td>
-					<td><?php echo $row->grand_total; ?></td>
-					<td><?php echo $row->paid_amount; ?></td>
-					<td><?php echo $row->payment_id; ?></td>
-					<td><?php echo $row->balance_amount; ?></td>
-					<td><?php echo $row->description; ?></td>
-					<td><?php echo get_company($row->company_id); ?></td>
-					<td><?php echo get_branch($row->branch_id); ?></td>
-					<td><?php echo $row->purchaseorder_id; ?></td>
-					<td><?php echo $row->total_lineitems; ?></td>
-					<td><?php echo $row->total_qty; ?></td>
-					<td><?php echo $row->total_linediscount; ?></td>
-					<td><?php echo $row->flatrate_discount; ?></td>
-					<td><?php echo $row->percentage_discount; ?></td>
-					<td><?php echo $row->total_overalldiscount; ?></td>
+					<td><?php echo $row->invoice_no; ?></td>
+					<td><?php echo $row->invoice_date; ?></td>
+					<td><?php echo $row->vendor_code; ?></td>
+					<td><?php echo $row->vendor_name; ?></td>
+					<td><?php echo $row->ingredient_id; ?></td>
+					<td><?php echo $row->ingredientcode; ?></td>
+					<td><?php echo $row->barcode; ?></td>
+					<td><?php echo $row->ingredient_name; ?></td>
+					<td><?php echo $row->qty; ?></td>
+					<td><?php echo $row->rate; ?></td>
+					<td><?php echo $row->unit; ?></td>
+					<td><?php echo $row->line_discount_type; ?></td>
+					<td><?php echo $row->line_discount; ?></td>
+					<td><?php echo $row->mrp_price; ?></td>
+					<td><?php echo $row->cost_price; ?></td>
+					<td><?php echo $row->selling_price; ?></td>
+					<td><?php echo $row->wholesale_price; ?></td>
+					<td><?php echo $row->tax; ?></td>
+					<td><?php echo $row->batch_no; ?></td>
+					<td><?php echo $row->expiry_date; ?></td>
+					<td><?php echo $row->sort_order; ?></td>
+					<td><?php echo $row->status; ?></td>
 					<td><?php echo $row->ip_address; ?></td>
 					<td><?php echo $row->browser; ?></td>
 					<td><?php echo $row->date; ?></td>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>
 					<td>
-						<a href="purchaseorderdetails_add.php?purchaseorder_id=<?php echo $row->purchaseorder_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="purchaseorder.php?po_no=<?php echo $row->po_no; ?>" title="Purchase Order Invoice"><i class="fa fa-eye"></i></a>
-						<a href="purchaseorder_view.php?purchaseorder_id=<?php echo $row->purchaseorder_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
+						<a href="purchaseingredient_add.php?purchaseingredient_id=<?php echo $row->purchaseingredient_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="purchaseingredient_view.php?purchaseingredient_id=<?php echo $row->purchaseingredient_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>
         </tr>
         <?php } ?>

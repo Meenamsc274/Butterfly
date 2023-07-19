@@ -338,8 +338,22 @@
 				<li>
                 	<a class="dropdown-item" href="#"> Purchase Ingredient &raquo; </a>
 					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
-                  		<li><a class="dropdown-item" href="purchaseingredientdetails_add.php">Purchas Ingredient Add</a></li>
+                  		<li><a class="dropdown-item" href="purchaseingredientdetails_add.php">Purchase Ingredient Add</a></li>
                   		<li><a class="dropdown-item" href="purchaseingredient_view.php">Purchase Ingredient View</a></li>
+					</ul>
+				</li>
+				<li>
+                	<a class="dropdown-item" href="#"> Purchase Return &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="purchasereturndetails_add.php">Purchase Return Add</a></li>
+                  		<li><a class="dropdown-item" href="purchasereturn_view.php">Purchase Return View</a></li>
+					</ul>
+				</li>
+				<li>
+                	<a class="dropdown-item" href="#"> Purchase Ingredient Return &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="purchaseingredientreturndetails_add.php">Purchase Ingredient Return Add</a></li>
+                  		<li><a class="dropdown-item" href="purchaseingredientreturn_view.php">Purchase Ingredient Return View</a></li>
 					</ul>
 				</li>
 			  </ul>

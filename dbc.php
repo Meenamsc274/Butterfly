@@ -397,18 +397,22 @@ function getIndianCurrency($number)
   return($return);
 }
 function get_company($company_id){
+  global $link;
 	list($company_name,$company_city,$company_area,$company_pincode) = mysqli_fetch_row(mysqli_query($link,"select `company_name`,`company_city`,`company_area`,`company_pincode` from company_tbl where company_id='$company_id'"));
 	return $company_id."<br>".$company_name."<br>".$company_city."<br>".$company_area."<br>".$company_pincode;
 }
 function get_branch($branch_id){
+  global $link;
 	list($branch_name,$branch_city,$branch_area,$branch_pincode) = mysqli_fetch_row(mysqli_query($link,"select `branch_name`,`branch_city`,`branch_area`,`branch_pincode` from branch_tbl where branch_id='$branch_id'"));
 	return $branch_id."<br>".$branch_name."<br>".$branch_city."<br>".$branch_area."<br>".$branch_pincode;
 }
 function get_customer($customer_id){
+  global $link;
 	list($name,$mobile,$state,$city,$area,$pincode) = mysqli_fetch_row(mysqli_query($link,"select `customer_name`,`mobile_number`,`state`,`city`,`area`,`pincode` from customer_tbl where customer_id='$customer_id'"));
 	return $customer_id."<br>".$name."<br>".$mobile."<br>".$state."<br>".$city."<br>".$area."<br>".$pincode;
 }
 function get_vendor($vendor_id){
+  global $link;
 	list($company_name,$state,$city,$area,$pincode) = mysqli_fetch_row(mysqli_query($link,"select `company_name`,`state`,`city`,`area`,`pincode` from vendor_tbl where vendor_id='$vendor_id'"));
 	return $vendor_id."<br>".$company_name."<br>".$state."<br>".$city."<br>".$area."<br>".$pincode;
 }
