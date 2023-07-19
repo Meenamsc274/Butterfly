@@ -518,6 +518,7 @@ top: -7px;
 .dropdown-menu .dropdown-submenu-left {
 right: 100%;
 left: auto;
+
 }
 .dropdown-menu > li:hover > .dropdown-submenu {
 display: block;
@@ -525,6 +526,8 @@ position: initial;
 font-size: 14px;
 margin-left: 20px;
 border:none;
+overflow: hidden;
+
 }
 
 .dropdown-item.active, .dropdown-item:active{
@@ -784,7 +787,7 @@ margin-bottom: 0px;
 }
 .scrollable-menu {
     height: auto;
-    max-height: 300px;
+    max-height: 400px;
     overflow-y: scroll;	
 	overflow-x: auto;	
 }

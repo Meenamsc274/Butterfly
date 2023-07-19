@@ -318,7 +318,33 @@
           </a>
           <ul class="dropdown-menu scrollable-menu" aria-labelledby="navbarDropdown">
            
-			
+		  <li>
+		  	<a class="dropdown-item" href="#"> Purchases &raquo;</a>
+			  <ul class="dropdown-menu scrollable-menu dropdown-submenu">
+			  	<li>
+                	<a class="dropdown-item" href="#"> Purchase Order &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="purchaseorderdetails_add.php">Purchase Order Add</a></li>
+                  		<li><a class="dropdown-item" href="purchaseorder_view.php">Purchase Order View</a></li>
+					</ul>
+				</li>
+				<li>
+                	<a class="dropdown-item" href="#"> Purchase &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="purchasedetails_add.php">Purchase  Add</a></li>
+                  		<li><a class="dropdown-item" href="purchase_view.php">Purchase View</a></li>
+					</ul>
+				</li>
+				<li>
+                	<a class="dropdown-item" href="#"> Purchase Ingredient &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="purchaseingredientdetails_add.php">Purchas Ingredient Add</a></li>
+                  		<li><a class="dropdown-item" href="purchaseingredient_view.php">Purchase Ingredient View</a></li>
+					</ul>
+				</li>
+			  </ul>
+			<li>
+		  </li>
                <li>
             <a class="dropdown-item" href="#">
           Transactions &raquo;
@@ -328,19 +354,19 @@
                 <a class="dropdown-item" href="#"> Purchases &raquo; </a>
                 <ul class="dropdown-menu scrollable-menu dropdown-submenu">
                   <li>
-                    <a class="dropdown-item" href="#">Shortage In Stocks</a>
+                    <a class="dropdown-item" href="purchaseorder_view.php">Purchase Order</a>
                   </li>
                   <li>
-                     <a class="dropdown-item" href="#">Exceses In Stocks</a>
+                     <a class="dropdown-item" href="#">Purchase</a>
                   </li>
 				     <li>
-                     <a class="dropdown-item" href="#">Stock Transfers</a>
+                     <a class="dropdown-item" href="#">Purchase Ingredient</a>
                   </li>
 				     <li>
-                     <a class="dropdown-item" href="#">Opening Stocks</a>
+                     <a class="dropdown-item" href="#">Purchase Return</a>
                   </li>
 				    <li>
-                     <a class="dropdown-item" href="#">Material  Requisition</a>
+                     <a class="dropdown-item" href="#">Purchase Ingredient Return</a>
                   </li>  
                 </ul> 
               </li> 
