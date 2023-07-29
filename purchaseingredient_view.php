@@ -131,7 +131,7 @@ $page = "purchaseingredient_view"; ?>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>
 					<td>
-						<a href="purchaseingredient_add.php?purchaseingredient_id=<?php echo $row->purchaseingredient_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="purchaseingredientdetails_add.php?purchaseingredient_id=<?php echo $row->purchaseingredient_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
 						<a href="purchaseingredient_view.php?purchaseingredient_id=<?php echo $row->purchaseingredient_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>
         </tr>

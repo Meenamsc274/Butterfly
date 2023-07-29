@@ -6,7 +6,7 @@ $approved_by = "";
 $page = "purchasereturn_view"; ?>
 <?php if($_GET['del'] == "yes"){
 	$return_id = $_GET['return_id'];
-    if(mysqli_query($link,"delete from `purchasereturn_tbl` where `return_id`='$return_id'")){
+    if(mysqli_query($link,"delete from `purchasereturn_tbl` where `purchasereturn_id `='$return_id'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
@@ -90,8 +90,8 @@ $page = "purchasereturn_view"; ?>
 
                 <tr>
                 <td><?php echo $row->id; ?></td>
-					<td><?php echo $row->return_id; ?></td>
-					<td><?php echo $row->return_date; ?></td>
+					<td><?php echo $row->purchasereturn_id ; ?></td>
+					<td><?php echo $row->purchasereturn_date; ?></td>
 					<td><?php echo $row->po_no; ?></td>
 					<td><?php echo $row->po_date; ?></td>
 					<td><?php echo $row->invoice_no; ?></td>
@@ -119,7 +119,7 @@ $page = "purchasereturn_view"; ?>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>
 					<td>
-						<a href="purchasereturn_add.php?return_id=<?php echo $row->return_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="purchasereturndetails_add.php?return_id=<?php echo $row->purchasereturn_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
 						<a href="purchasereturninvoice.php?invoice_no=<?php echo $row->invoice_no; ?>" title="Purchase Return Invoice"><i class="fa fa-eye"></i></a>
 						<a href="purchasereturn_view.php?return_id=<?php echo $row->return_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>

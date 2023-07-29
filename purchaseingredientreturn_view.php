@@ -90,8 +90,8 @@ $page = "purchaseingredientreturn_view"; ?>
 
                 <tr>
                 <td><?php echo $row->id; ?></td>
-					<td><?php echo $row->return_id; ?></td>
-					<td><?php echo $row->return_date; ?></td>
+					<td><?php echo $row->purchaseingredientreturn_id ; ?></td>
+					<td><?php echo $row->purchaseingredientreturn_date; ?></td>
 					<td><?php echo $row->po_no; ?></td>
 					<td><?php echo $row->po_date; ?></td>
 					<td><?php echo $row->invoice_no; ?></td>
@@ -119,7 +119,7 @@ $page = "purchaseingredientreturn_view"; ?>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>
 					<td>
-						<a href="purchaseingredientreturn_add.php?return_id=<?php echo $row->return_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="purchaseingredientreturndetails_add.php?return_id=<?php echo $row->return_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
 						<a href="purchaseingredientreturninvoice.php?invoice_no=<?php echo $row->invoice_no; ?>" title="Purchase Ingredient Return Invoice"><i class="fa fa-eye"></i></a>
 						<a href="purchaseingredientreturn_view.php?return_id=<?php echo $row->return_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>

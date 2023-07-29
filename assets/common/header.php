@@ -357,38 +357,36 @@
 					</ul>
 				</li>
 			  </ul>
-			<li>
+			
+		  </li>
+		  <li>
+		  	<a class="dropdown-item" href="#"> Sales &raquo;</a>
+			  <ul class="dropdown-menu scrollable-menu dropdown-submenu">
+			  	<li>
+                	<a class="dropdown-item" href="#"> Sales &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+                  		<li><a class="dropdown-item" href="pos.php">POS</a></li>
+                  		<li><a class="dropdown-item" href="sales_add.php">Sales Add</a></li>
+				     	<li><a class="dropdown-item" href="sales_view.php">Sales View</a></li>
+					</ul>
+				</li>
+				<li>
+                	<a class="dropdown-item" href="#"> Sales Return &raquo; </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+						<li><a class="dropdown-item" href="salesreturndetails_add.php">Sales Return Add</a></li>
+				     	<li><a class="dropdown-item" href="salesreturn_view.php">Sales Return View</a></li>
+					</ul>
+				</li>
+			  </ul>
+			
 		  </li>
                <li>
             <a class="dropdown-item" href="#">
           Transactions &raquo;
             </a>
             <ul class="dropdown-menu scrollable-menu dropdown-submenu">
-			<li>
-                <a class="dropdown-item" href="#"> Purchases &raquo; </a>
-                <ul class="dropdown-menu scrollable-menu dropdown-submenu">
-                  <li>
-                    <a class="dropdown-item" href="purchaseorder_view.php">Purchase Order</a>
-                  </li>
-                  <li>
-                     <a class="dropdown-item" href="#">Purchase</a>
-                  </li>
-				     <li>
-                     <a class="dropdown-item" href="#">Purchase Ingredient</a>
-                  </li>
-				     <li>
-                     <a class="dropdown-item" href="#">Purchase Return</a>
-                  </li>
-				    <li>
-                     <a class="dropdown-item" href="#">Purchase Ingredient Return</a>
-                  </li>  
-                </ul> 
-              </li> 
-              
-              <li>
-                <a class="dropdown-item" href="#"> Sales</a>
-              </li>
-              <li>
+			
+             
                 <a class="dropdown-item" href="#"> Stocks &raquo; </a>
                 <ul class="dropdown-menu scrollable-menu dropdown-submenu">
                   <li>

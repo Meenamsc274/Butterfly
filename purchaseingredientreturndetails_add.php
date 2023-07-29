@@ -314,14 +314,14 @@ if($_POST['submit'] == "Submit"){
                 <div class="box">
                     <div class="box-header">
                       <div class="row">
-                        <div class="col-lg-6"><h3 class="box-heading"> Purchase Ingredient<small>Add / Update  Details</small></h3></h3></div>
+                        <div class="col-lg-6"><h3 class="box-heading"> Purchase Ingredient Return <small>Add / Update  Details</small></h3></h3></div>
                         <div class="col-lg-6">
                           <div class="breadcrumb">
                             <a href="index.php" class="breadcrumb_a">Home</a> 
                             <i class="fa fa-angle-double-right angle_double_right"></i>
-                            <a href="purchaseingredientreturn_view.php" class="breadcrumb_a">Purchase Ingredient</a> 
+                            <a href="purchaseingredientreturn_view.php" class="breadcrumb_a">Purchase Ingredient Return </a> 
                             <i class="fa fa-angle-double-right angle_double_right" aria-hidden="true"></i>
-                            <a href="#" class="breadcrumb_a">Add / Update Purchase Ingredient</a>
+                            <a href="#" class="breadcrumb_a">Add / Update Purchase Ingredient Return </a>
                           </div>
                         </div>
                       </div>
@@ -784,7 +784,7 @@ $upload_id="pur_re-".$max_id;
     </div>
 </div>
 <div id="stock" class="modal fade bd-example-modal-xl" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-			<div class="modal-dialog modal-lg">
+			<div class="modal-dialog modal-xl">
 				<div class="modal-content">
 					<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
