@@ -173,7 +173,7 @@ if(mysqli_query($link,"UPDATE `tax_tbl` SET `tax_name` = '$tax_name', `tax_value
         <label class="margin-left-10" for="industry_name">Country</label>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
-         <input type=" select" class="form-control" name="country" id="country" placeholder="Please select the Country" value="<?php echo $row->country; ?>" required="required">
+         <input type="text" class="form-control" name="country" id="country" placeholder="Please select the Country" value="<?php echo $row->country; ?>" required="required">
         </div>
       </div>
     </div>
@@ -183,7 +183,7 @@ if(mysqli_query($link,"UPDATE `tax_tbl` SET `tax_name` = '$tax_name', `tax_value
         <label class="margin-left-10" for="industry_name">State</label>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
-         <input type=" select" class="form-control" name="state" id="state" placeholder="Please select the State" value="<?php echo $row->state; ?>" required="required">
+         <input type="text" class="form-control" name="state" id="state" placeholder="Please select the State" value="<?php echo $row->state; ?>" required="required">
         </div>
       </div>
     </div>

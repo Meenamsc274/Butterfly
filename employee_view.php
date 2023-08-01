@@ -77,7 +77,7 @@ $page = "employee_view"; ?>
 					<td><?php echo $row->designation; ?></td>
 					<td><?php echo $row->doj; ?></td>
 					<td>
-						<a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
+						<a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&Update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
 						<a href="employee_view.php?emp_id=<?php echo $row->emp_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>
         </tr>

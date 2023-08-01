@@ -132,10 +132,10 @@
 					<form method="post">
 						
 						<div class="form-group">
-							<input type="email" name="user_email" placeholder="Email" required>
+							<input value="admin@ragadesigners.com" type="email" name="user_email" placeholder="Email" required>
 						</div>
 						<div class="form-group">		
-							<input type="password" name="pwd" id="pwd" placeholder="Password">
+							<input value="1234" type="password" name="pwd" id="pwd" placeholder="Password">
 						</div>	
 						<div class="row mt-3">
 					        <div class="col-8">

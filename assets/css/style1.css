@@ -2,9 +2,7 @@
   --main-bg-color: #ecfefa;
   --manin-black-color: #000000a8;
 }
-.margin-right-10{
-	margin-right: 15px;
-}
+
 .box-bg{
 	background: var(--main-bg-color);
     margin: 15px 15px 10px 0px;
@@ -36,13 +34,12 @@
 
 
 .breadcrumb{
-	float: right;
 	padding: 11px 10px 0px 0px;
 }
 .angle_double_right{
 	font-size: 8px;
   color: gray;
-  margin: 11px 7px 0px 7px;
+  margin: 4px 7px 1px 11px;
 }
 .breadcrumb_a{
 	font-size: 12px;
@@ -58,7 +55,70 @@
 .padding-10{
 	padding: 10px;
 }
+.margin-right-10{
+	margin-right: 15px;
+}
 small{
 	font-size: 16px;
   font-style: italic;
+}
+.card_box_shadow{
+	box-shadow: 1px 2px 16px #80808070;
+}
+.dropdown-item{
+	color:black !important;
+}
+.dropdown-item:hover{
+	color:white !important;
+	background-color: #1cbdba;
+}
+.bg-default{
+  background-color: #1cbdba !important;
+  color:white !important;
+}
+.btn-outline-default{
+  border-color: #1cbdba !important;
+  color:#1cbdba !important;
+  background: white !important;
+}
+.float-right{
+  float: right ;
+}
+.float_left{
+  float: left;
+}
+.margin-28{
+  margin: 28px;
+}
+.margin-20{
+  margin: 20px;
+}
+hr{
+  border-top : 1px solid rgb(0 0 0 / 31%) !important;
+  width: 93% !important;
+}
+.display_block{
+  display: block;
+}
+.font_weight_normal{
+  font-weight: normal;
+}
+.border_radius_50{
+  border-radius: 50%;
+}
+.margin_top_40{
+  margin-top: 40px;
+}
+.margin_0{
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.height_80{
+  height: 80px !important;
+}
+.form_box_shadow{
+  box-shadow: 1px 1px 14px #80808063;
+  margin: 10px 10px 20px 10px !important;
+  padding: 12px 12px 20px;
+  border-radius: 13px;
 }

@@ -46,7 +46,7 @@ $page = "employee_view"; ?>
 	              			<!-- <h5 class="second_heading">Add Industry</h5> -->
                    <div class="row">
                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                   <div class="card">
+                   <div class="card card_box_shadow">
   <div class="card-body">
     <h5 class="card-title">Personal Details</h5><hr/>
    <div class="row">
@@ -80,7 +80,7 @@ $page = "employee_view"; ?>
 </div>
 <!---  Panel End -->
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                   <div class="card">
+                   <div class="card card_box_shadow" >
   <div class="card-body">
     <h5 class="card-title">Company Detail</h5><hr/>
    <div class="row">
@@ -109,7 +109,7 @@ $page = "employee_view"; ?>
 <!-- Row End-->
 <div class="row">
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                   <div class="card">
+                   <div class="card card_box_shadow">
   <div class="card-body">
     <h5 class="card-title">Document Detail</h5><hr/>
    <div class="row">
@@ -131,7 +131,7 @@ $page = "employee_view"; ?>
 </div>
 <!---  Panel End -->
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                   <div class="card">
+                   <div class="card card_box_shadow">
   <div class="card-body">
     <h5 class="card-title">Bank Account Detail</h5><hr/>
    <div class="row">

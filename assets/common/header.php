@@ -281,6 +281,85 @@
 					 
           </ul>
         </li>
+
+		<li class="nav-item dropdown">
+          	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"> 
+           	 	HRM System
+          	</a>
+          	<ul class="dropdown-menu scrollable-menu" aria-labelledby="navbarDropdown">
+           		<li><a class="dropdown-item" href="employee_view.php">Employee Setup</a></li>    
+				<li>
+					<a class="dropdown-item" href="#"> Payroll Setup &raquo;  </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+						<li><a class="dropdown-item" href="salary_view.php"> Set Salary</a></li>
+						<li><a class="dropdown-item" href="#"> Payslip</a></li>
+					</ul>
+				</li>
+	          	<li>
+            		<a class="dropdown-item" href="#"> Leave Management Setup &raquo;  </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+						<li><a class="dropdown-item" href="leave_view.php"> Manage Leave</a></li>
+						<li><a class="dropdown-item" href="#"> Attendance &raquo; </a>
+							<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+								<li><a class="dropdown-item" href="#">Mark Attendance</a></li>
+								<li><a class="dropdown-item" href="bulk_attendance.php">Bulk Attendance</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li> 
+	         
+	          	<li>
+            		<a class="dropdown-item" href="#"> Performance Setup &raquo;  </a>
+					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+						<li><a class="dropdown-item" href="#"> Indicator</a></li>
+						<li><a class="dropdown-item" href="#"> Appraisal</a></li>
+						<li><a class="dropdown-item" href="#"> Goal Tracking</a></li>
+					</ul>
+	          	</li>
+	         	<li>
+            		<a class="dropdown-item" href="#"> Training &raquo;  </a>
+	            	<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+	              		<li><a class="dropdown-item" href="trainer_list_view.php"> Training List</a></li>
+				   		<li><a class="dropdown-item" href="trainer_view.php"> Trainer</a></li>
+	            	</ul>
+	          	</li>
+	          	<li>
+            		<a class="dropdown-item" href="#"> Recruitment &raquo;  </a>
+	            	<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+	              		<li><a class="dropdown-item" href="#"> Jobs</a></li>
+				   		<li><a class="dropdown-item" href="#"> Job Create</a></li>
+				   		<li><a class="dropdown-item" href="#"> Job Application</a></li>
+				   		<li><a class="dropdown-item" href="#"> Job Candidate</a></li>
+				   		<li><a class="dropdown-item" href="#"> Job On-boarding</a></li>
+				   		<li><a class="dropdown-item" href="#"> Custom Question</a></li>
+				   		<li><a class="dropdown-item" href="#"> Interview Schedule</a></li>
+				   		<li><a class="dropdown-item" href="#"> Career </a></li>
+	            	</ul>
+	          	</li>
+	          	<li>
+            		<a class="dropdown-item" href="#"> HR Admin Setup &raquo;  </a>
+	            	<ul class="dropdown-menu scrollable-menu dropdown-submenu">
+	              		<li><a class="dropdown-item" href="#"> Award</a></li>
+				   		<li><a class="dropdown-item" href="#"> Transfer</a></li>
+				   		<li><a class="dropdown-item" href="#"> Resignation</a></li>
+				   		<li><a class="dropdown-item" href="#"> Trip</a></li>
+				   		<li><a class="dropdown-item" href="#"> Promotion</a></li>
+				   		<li><a class="dropdown-item" href="#"> Complaints</a></li>
+				   		<li><a class="dropdown-item" href="#"> Warning</a></li>
+				   		<li><a class="dropdown-item" href="#"> Termination</a></li>
+				   		<li><a class="dropdown-item" href="#"> Announcement</a></li>
+				   		<li><a class="dropdown-item" href="#"> Holidays</a></li>
+	            	</ul>
+	         	</li>
+			  	<li><a class="dropdown-item" href="#">Event Setup</a></li>
+			  	<li><a class="dropdown-item" href="#">Meeting</a></li>
+			  	<li><a class="dropdown-item" href="#">Employees Asset Setup</a></li>
+			  	<li><a class="dropdown-item" href="#">Document Setup</a></li>
+			  	<li><a class="dropdown-item" href="#">Company Policy</a></li>
+			  	<li><a class="dropdown-item" href="#">HRM System Setup</a></li>
+	         	<li><hr class="dropdown-divider"></li>	 
+          	</ul>
+        </li>
 		
         <li class="nav-item ">
          

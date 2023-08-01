@@ -214,10 +214,11 @@ if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone
                       <form method="post" class="padding-10" enctype="multipart/form-data">
                         <?php
 $emp_id = $_GET['emp_id'];
-  $update = mysqli_real_escape_string($link,$_GET['update']);
-  if($update == "yes"){
+  $Update = mysqli_real_escape_string($link,$_GET['Update']);
+  if($Update == "yes"){
   $sel_row=mysqli_query($link,"select * from employee where `emp_id`='$emp_id'");
   $row5 = mysqli_fetch_object($sel_row);
+  
   $upload_id = $emp_id;
   }
   else
@@ -337,7 +338,7 @@ $emp_id = $_GET['emp_id'];
         while($row1 = mysqli_fetch_object($sel_rw)){
         ?>
 
-        <option value="<?php echo $row1->branch_name; ?>"><?php echo $row1->branch_name; ?></option>
+        <option value="<?php echo $row1->branch_id; ?>"><?php echo $row1->branch_name; ?></option>
 
         <?php } ?>
         </select>
@@ -350,16 +351,16 @@ $emp_id = $_GET['emp_id'];
         <label class="margin-left-10" for="sub_category">Department</label>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
-           <select name="department" id="department" class="form-control" required="required">
-				<?php
-				$sel_rw1 = mysqli_query($link,"select * from department_tbl");
-				while($row1 = mysqli_fetch_object($sel_rw1)){
-				?>
+          <select name="department" id="department" class="form-control" required="required">
+            <?php
+            $sel_rw1 = mysqli_query($link,"select * from department_tbl");
+            while($row1 = mysqli_fetch_object($sel_rw1)){
+            ?>
 
-				<option value="<?php echo $row1->department_name; ?>"><?php echo $row1->department_name; ?></option>
+            <option value="<?php echo $row1->department_id ; ?>"><?php echo $row1->department_name; ?></option>
 
-				<?php } ?>
-				</select>
+            <?php } ?>
+				  </select>
 		
         </div>
       </div>
@@ -403,8 +404,8 @@ $emp_id = $_GET['emp_id'];
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
 		 <?php
-                            if($_GET['action']=="Update"){
-                                $product_img = $row5->certificate;
+                            if($_GET['Update']=="yes"){
+                               $product_img = $row5->certificate;
                             }else{
                                $product_img =""; 
                             }
@@ -417,11 +418,11 @@ $emp_id = $_GET['emp_id'];
                             }    
                             if($product_img != ""){
                             ?>
-                            <input type="file" class="form-control" id="certificate" name="certificate" value="<?php echo $product_img; ?>" />
+                            <input type="hidden" class="form-control" id="certificate" name="certificate" value="<?php echo $product_img; ?>" />
                             <?php
                             }
                             ?>
-           <input type="file" class="form-control" name="certificate" id="certificate"  value="<?php echo $row->product_img; ?>"  min="0" max="0" required="required">
+           <input type="file" class="form-control" name="certificate" id="certificate"  value="<?php echo $row->product_img; ?>" <?php if(!isset($_GET['Update'])){ echo "required"; } ?>>
         </div>
       </div>
     </div>
@@ -432,7 +433,7 @@ $emp_id = $_GET['emp_id'];
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
 		 <?php
-                            if($_GET['action']=="Update"){
+                             if($_GET['Update']=="yes"){
                                 $product_img = $row5->resume;
                             }else{
                                $product_img =""; 
@@ -446,11 +447,11 @@ $emp_id = $_GET['emp_id'];
                             }    
                             if($product_img != ""){
                             ?>
-                            <input type="file" class="form-control" id="resume" name="resume" value="<?php echo $product_img; ?>" />
+                            <input type="hidden" class="form-control" id="resume" name="resume" value="<?php echo $product_img; ?>" />
                             <?php
                             }
                             ?>
-           <input type="file" class="form-control" name="resume" id="resume"  value="<?php echo $row->product_img; ?>"  min="0" max="0" required="required">
+           <input type="file" class="form-control" name="resume" id="resume"  value="<?php echo $row->product_img; ?>"  <?php if(!isset($_GET['Update'])){ echo "required"; } ?>>
         </div>
       </div>
     </div>
@@ -461,7 +462,7 @@ $emp_id = $_GET['emp_id'];
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
 		 <?php
-                            if($_GET['action']=="Update"){
+                             if($_GET['Update']=="yes"){
                                 $product_img = $row5->photo;
                             }else{
                                $product_img =""; 
@@ -479,7 +480,7 @@ $emp_id = $_GET['emp_id'];
                             <?php
                             }
                             ?>
-           <input type="file" class="form-control" name="photo" id="photo"  value="<?php echo $row->photo; ?>"  min="0" max="0" required="required">
+           <input type="file" class="form-control" name="photo" id="photo"  value="<?php echo $row->photo; ?>" <?php if(!isset($_GET['Update'])){ echo "required"; } ?>>
         </div>
       </div>
     </div>

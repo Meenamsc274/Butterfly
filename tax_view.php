@@ -6,7 +6,7 @@ $approved_by = "";
 $page = "tax_view"; ?>
 <?php if($_GET['del'] == "yes"){
 	$tax_id=$_GET['tax_id'];
-    if(mysql_query("delete from `tax_tbl` where `tax_id`='$tax_id'")){
+    if(mysqli_query($link,"delete from `tax_tbl` where `tax_id`='$tax_id'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
