@@ -29,6 +29,29 @@ if(isset($_POST['submit'])){
             $err[] = "Error in saving data!";
         }
     }
+
+    if($_POST['submit']=='Update'){
+        $autoid = mysqli_real_escape_string($link,$_POST['autoid']);
+        $employee = mysqli_real_escape_string($link,$_POST['employee']);
+        $leave_type = mysqli_real_escape_string($link,$_POST['leave_type']);
+        $start_date = mysqli_real_escape_string($link,$_POST['start_date']);
+        $end_date = mysqli_real_escape_string($link,$_POST['end_date']);
+        $leave_reason = mysqli_real_escape_string($link,$_POST['leave_reason']);
+        $remark = mysqli_real_escape_string($link,$_POST['remark']);
+
+        $date1=date_create($start_date);
+        $date2=date_create($end_date);
+        $diff=date_diff($date1,$date2);
+        $total_days = $diff->format("%a days");
+
+        if(mysqli_query($link,"update `leave_tbl` set `employee`='$employee', `leave_type`='$leave_type', `start_date`='$start_date', `end_date`='$end_date', `leave_reason`='$leave_reason', `remark`='$remark', `ip_address`='$ip_address', `browser`='$browser', `date`=NOW(), `created_by`='$created_by', `approved_by`='$approved_by',`total_days`='$total_days' where autoid = '$autoid'")){
+            $msg[] = "Successfully Saved!";
+        }
+        else
+        {
+            $err[] = "Error in saving data!";
+        }
+    }
 }
 
 if(isset($_POST['action'])){

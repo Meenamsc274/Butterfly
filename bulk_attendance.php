@@ -17,11 +17,14 @@ $page = "trainer_list_view"; ?>
 
   if(isset($_POST['submit'])){
 
-    $datefilter = $_POST['datefilter'];
-      $dates = explode('-',$datefilter);
-      $start_date = date('Y-m-d',strtotime($dates[0]));
-      $end_date = date('Y-m-d',strtotime($dates[1]));
+    $branch = $_POST['branch'];
+    $department = $_POST['department'];
 
+    $datefilter = $_POST['datefilter'];
+    $dates = explode('-',$datefilter);
+    $start_date = date('Y-m-d',strtotime($dates[0]));
+    $end_date = date('Y-m-d',strtotime($dates[1] . ' +1 day'));
+    
     $period = new DatePeriod(
       new DateTime($start_date),
       new DateInterval('P1D'),
@@ -30,41 +33,58 @@ $page = "trainer_list_view"; ?>
 
     foreach($_POST['employee'] as $emp_id){
       
-      $in_time = $_POST['in_time_'].$emp_id;
-      $out_time = $_POST['out_time_'].$emp_id;
+      $in_time = $_POST['in_time_'.$emp_id];
+     
+      $out_time = $_POST['out_time_'.$emp_id];
 
      
       foreach ($period as $key => $value) {
         $date =  $value->format('Y-m-d');
-
+        
         $max = maxOfAll('id','attendance_tbl');
 
         $autoid = 'ATT-'.$max+1;
+        
+        // exit();
 
         $sel = mysqli_query($link,"select id from attendance_tbl where date='$date' and e_id='$emp_id'");
+        
         if(mysqli_num_rows($sel)==0){
-          $insert = mysqli_query($link,"insert into attendance_tbl(`autoid`,`date`,`in_time`,`out_time`,`daystatus`, `ip_address`, `browser`, `created_at`, `created_by`, `approved_by`)values('$autoid','$date','$in_time','$out_time','Present', '$ip_address', '$browser', NOW(), '$created_by', '$approved_by')");
+          $insert = mysqli_query($link,"insert into attendance_tbl(`autoid`, `e_id`, `date`,`in_time`,`out_time`,`daystatus`, `ip_address`, `browser`, `created_at`, `created_by`, `approved_by`, `branch`, `department`)values('$autoid','$emp_id','$date','$in_time','$out_time','Present', '$ip_address', '$browser', NOW(), '$created_by', '$approved_by', '$branch', '$department')");
+          
         }else{
-          $update = mysqli_query($link,"update attendance_tbl set `date` = '$date',`in_time` = '$in_time',`out_time` = '$out_time',`daystatus` = 'Present', `ip_address` = '$ip_address', `browser` = '$browser', `updated_at` = NOW(), `created_by` = '$created_by', `approved_by` = '$approved_by'");
+          $fet = mysqli_fetch_object($sel);
+          $id = $fet->id;
+          $update = mysqli_query($link,"update attendance_tbl set `date` = '$date',`in_time` = '$in_time',`out_time` = '$out_time',`daystatus` = 'Present', `ip_address` = '$ip_address', `browser` = '$browser', `updated_at` = NOW(), `created_by` = '$created_by', `approved_by` = '$approved_by' where id='$id'");
         }
       }
     }
 
-    $branch = $_POST['branch'];
-    $department = $_POST['department'];
+    
 
-    $sel_rw1 = mysqli_query($link,"select emp_id,name,branch,department from employee where branch='$branch' and department='$department' and doj>='$start_date'");
+    
+
+    $sel_rw1 = mysqli_query($link,"select emp_id,name,branch,department from employee where branch='$branch' and department='$department' and doj<='$start_date'");
 
     while($rw1 = mysqli_fetch_object($sel_rw1)){
       $eid = $rw1->emp_id;
       foreach ($period as $key => $value) {
-        $date =  $value->format('Y-m-d');
-        if(in_array($eid, $_POST['employee'])){
-          $sel = mysqli_query($link,"select id from attendance_tbl where date='$date' and e_id='$emp_id'");
+        
+         $date =  $value->format('Y-m-d');
+        if(!in_array($eid, $_POST['employee'])){
+
+          $sel = mysqli_query($link,"select id from attendance_tbl where date='$date' and e_id='$eid'");
           if(mysqli_num_rows($sel)==0){
-            $insert = mysqli_query($link,"insert into attendance_tbl(`autoid`,`date`,`in_time`,`out_time`,`daystatus`, `ip_address`, `browser`, `created_at`, `created_by`, `approved_by`)values('$autoid','$date','$in_time','$out_time','Present', '$ip_address', '$browser', NOW(), '$created_by', '$approved_by')");
+
+            $max = maxOfAll('id','attendance_tbl');
+
+            $autoid = 'ATT-'.$max+1;
+
+            $insert = mysqli_query($link,"insert into attendance_tbl(`autoid`, `e_id`, `date`,`in_time`,`out_time`,`daystatus`, `ip_address`, `browser`, `created_at`, `created_by`, `approved_by`,`branch`, `department`)values('$autoid','$eid','$date','$in_time','$out_time','Leave', '$ip_address', '$browser', NOW(), '$created_by', '$approved_by','$branch', '$department')");
+
+           
           }else{
-            $update = mysqli_query($link,"update attendance_tbl set `date` = '$date',`in_time` = '$in_time',`out_time` = '$out_time',`daystatus` = 'Present', `ip_address` = '$ip_address', `browser` = '$browser', `updated_at` = NOW(), `created_by` = '$created_by', `approved_by` = '$approved_by'");
+           // $update = mysqli_query($link,"update attendance_tbl set `date` = '$date',`in_time` = '$in_time',`out_time` = '$out_time',`daystatus` = 'Present', `ip_address` = '$ip_address', `browser` = '$browser', `updated_at` = NOW(), `created_by` = '$created_by', `approved_by` = '$approved_by'");
           }
         }
       }
@@ -177,7 +197,7 @@ $page = "trainer_list_view"; ?>
           $dates = explode('-',$datefilter);
           $start_date = date('Y-m-d',strtotime($dates[0]));
 
-          $sel_rw = mysqli_query($link,"select emp_id,name,branch,department from employee where branch='$branch' and department='$department' and doj>='$start_date'");
+          $sel_rw = mysqli_query($link,"select emp_id,name,branch,department from employee where branch='$branch' and department='$department' and doj<='$start_date'");
         }else{
           $sel_rw = mysqli_query($link,"select emp_id,name,branch,department from employee");
         }

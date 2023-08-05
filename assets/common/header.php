@@ -301,7 +301,7 @@
 						<li><a class="dropdown-item" href="leave_view.php"> Manage Leave</a></li>
 						<li><a class="dropdown-item" href="#"> Attendance &raquo; </a>
 							<ul class="dropdown-menu scrollable-menu dropdown-submenu">
-								<li><a class="dropdown-item" href="#">Mark Attendance</a></li>
+								<li><a class="dropdown-item" href="employee_attendance.php">Mark Attendance</a></li>
 								<li><a class="dropdown-item" href="bulk_attendance.php">Bulk Attendance</a></li>
 							</ul>
 						</li>
@@ -339,16 +339,16 @@
 	          	<li>
             		<a class="dropdown-item" href="#"> HR Admin Setup &raquo;  </a>
 	            	<ul class="dropdown-menu scrollable-menu dropdown-submenu">
-	              		<li><a class="dropdown-item" href="#"> Award</a></li>
-				   		<li><a class="dropdown-item" href="#"> Transfer</a></li>
-				   		<li><a class="dropdown-item" href="#"> Resignation</a></li>
-				   		<li><a class="dropdown-item" href="#"> Trip</a></li>
-				   		<li><a class="dropdown-item" href="#"> Promotion</a></li>
-				   		<li><a class="dropdown-item" href="#"> Complaints</a></li>
-				   		<li><a class="dropdown-item" href="#"> Warning</a></li>
-				   		<li><a class="dropdown-item" href="#"> Termination</a></li>
-				   		<li><a class="dropdown-item" href="#"> Announcement</a></li>
-				   		<li><a class="dropdown-item" href="#"> Holidays</a></li>
+	              		<li><a class="dropdown-item" href="award.php"> Award</a></li>
+				   		<li><a class="dropdown-item" href="transfer.php"> Transfer</a></li>
+				   		<li><a class="dropdown-item" href="resignation.php"> Resignation</a></li>
+				   		<li><a class="dropdown-item" href="trip.php"> Trip</a></li>
+				   		<li><a class="dropdown-item" href="promotion.php"> Promotion</a></li>
+				   		<li><a class="dropdown-item" href="complain.php"> Complaints</a></li>
+				   		<li><a class="dropdown-item" href="warning.php"> Warning</a></li>
+				   		<li><a class="dropdown-item" href="termination.php"> Termination</a></li>
+				   		<li><a class="dropdown-item" href="announcement.php"> Announcement</a></li>
+				   		<li><a class="dropdown-item" href="holiday.php"> Holidays</a></li>
 	            	</ul>
 	         	</li>
 			  	<li><a class="dropdown-item" href="#">Event Setup</a></li>

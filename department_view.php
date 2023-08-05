@@ -53,6 +53,7 @@ $page = "department_view"; ?>
 		         <th>id</th>
 					<th>Department Id</th>
 					<th>Department Name</th>
+					<th>Branch</th>
 					<th>Date</th>
 					<th>Created By</th>
 					<th>Approved By</th>
@@ -65,12 +66,16 @@ $page = "department_view"; ?>
         <?php
         $sel_rw = mysqli_query($link,"select * from department_tbl");
         while($row = mysqli_fetch_object($sel_rw)){
+			$branch = $row->branch;
+
+			list($branch_name) = mysqli_fetch_row(mysqli_query($link,"select branch_name from branch_tbl where branch_id='$branch'"));
         ?>
 
                 <tr>
          <td><?php echo $row->id; ?></td>
 					<td><?php echo $row->department_id; ?></td>
 					<td><?php echo $row->department_name; ?></td>
+					<td><?php echo $branch_name; ?></td>
 					<td><?php echo $row->date; ?></td>
 					<td><?php echo $row->created_by; ?></td>
 					<td><?php echo $row->approved_by; ?></td>

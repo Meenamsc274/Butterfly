@@ -8,10 +8,11 @@ $approved_by = "";
 if($_POST['submit'] == "Submit"){
 $id = mysqli_real_escape_string($link,$_POST['id']);
 $department_id = mysqli_real_escape_string($link,$_POST['department_id']);
+$branch = mysqli_real_escape_string($link,$_POST['branch']);
 $department_name = mysqli_real_escape_string($link,$_POST['department_name']);
 $status = mysqli_real_escape_string($link,$_POST['status']);
 $sort_order = mysqli_real_escape_string($link,$_POST['sort_order']);
-if(mysqli_query($link,"INSERT INTO `department_tbl` (`id`, `department_id`, `department_name`, `date`, `created_by`, `approved_by`, `status`, `sort_order`) VALUES ('$id', '$department_id', '$department_name', '$date', '$created_by', '$approved_by', '$status', '$sort_order')")){
+if(mysqli_query($link,"INSERT INTO `department_tbl` (`id`, `department_id`, `department_name`, `date`, `created_by`, `approved_by`, `status`, `sort_order`,`branch`) VALUES ('$id', '$department_id', '$department_name', '$date', '$created_by', '$approved_by', '$status', '$sort_order','$branch')")){
 $msg[] = "Successfully Saved!";
   }
   else
@@ -25,10 +26,11 @@ $msg[] = "Successfully Saved!";
 if($_POST['submit'] == "Update"){
 $id = mysqli_real_escape_string($link,$_POST['id']);
 $department_id = mysqli_real_escape_string($link,$_POST['department_id']);
+$branch = mysqli_real_escape_string($link,$_POST['branch']);
 $department_name = mysqli_real_escape_string($link,$_POST['department_name']);
 $status = mysqli_real_escape_string($link,$_POST['status']);
 $sort_order = mysqli_real_escape_string($link,$_POST['sort_order']);
-if(mysqli_query($link,"UPDATE `department_tbl` SET `department_name` = '$department_name', `date` = '$date', `created_by` = '$created_by', `approved_by` = '$approved_by', `status` = '$status', `sort_order` = '$sort_order' WHERE `department_id`='$department_id'")){$msg[] = "Successfully Saved!";
+if(mysqli_query($link,"UPDATE `department_tbl` SET `department_name` = '$department_name', `date` = '$date', `created_by` = '$created_by', `approved_by` = '$approved_by', `status` = '$status', `sort_order` = '$sort_order',`branch` = '$branch' WHERE `department_id`='$department_id'")){$msg[] = "Successfully Saved!";
   }
   else
   {
@@ -58,15 +60,16 @@ if(mysqli_query($link,"UPDATE `department_tbl` SET `department_name` = '$departm
                 <div class="box">
                     <div class="box-header">
                       <div class="row">
-                        <div class="col-lg-6"><h3 class="box-heading"> Department <small>Add / Update  Details</small></h3></h3></div>
-                        <div class="col-lg-6">
-                          <div class="breadcrumb">
+                        <div class="col-lg-6"><h3 class="box-heading"> Department <small>Add / Update  Details</small>
+                        <div class="breadcrumb">
                             <a href="index.php" class="breadcrumb_a">Home</a> 
                             <i class="fa fa-angle-double-right angle_double_right"></i>
                             <a href="department_view.php" class="breadcrumb_a">Department </a> 
                             <i class="fa fa-angle-double-right angle_double_right" aria-hidden="true"></i>
                             <a href="#" class="breadcrumb_a">Add / Update Department </a>
-                          </div>
+                          </div></h3></div>
+                        <div class="col-lg-6">
+                          
                         </div>
                       </div>
                     </div>
@@ -118,6 +121,23 @@ if(mysqli_query($link,"UPDATE `department_tbl` SET `department_name` = '$departm
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
           <input type="text" class="form-control" name="department_id" id="department_id" placeholder="" value="<?php echo $upload_id; ?>" readonly="readonly" >
+        </div>
+      </div>
+    </div>
+
+    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
+      <div class="form-group row">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
+        <label class="margin-left-10" for="industry_name">Branch</label>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
+          <select name="branch" class="form-control branch" required>
+            <option value="">Select Branch</option>
+              <?php $sel_branch = mysqli_query($link,"select branch_id,branch_name from branch_tbl"); 
+              while($fet_branch = mysqli_fetch_object($sel_branch)){
+                  ?><option <?php if($_GET['branch']==$fet_branch->branch_id){ echo 'selected'; } ?> value="<?php echo $fet_branch->branch_id; ?>"><?php echo $fet_branch->branch_name; ?></option><?php
+              } ?>
+          </select>
         </div>
       </div>
     </div>
@@ -185,6 +205,7 @@ if(mysqli_query($link,"UPDATE `department_tbl` SET `department_name` = '$departm
   <script>
 $(document).ready(function() {
 $("#status option[value='<?php echo $row->status; ?>']").attr("selected", "selected");
+$("#branch option[value='<?php echo $row->branch; ?>']").attr("selected", "selected");
 });
 </script>
  
