@@ -292,7 +292,7 @@
 					<a class="dropdown-item" href="#"> Payroll Setup &raquo;  </a>
 					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
 						<li><a class="dropdown-item" href="salary_view.php"> Set Salary</a></li>
-						<li><a class="dropdown-item" href="#"> Payslip</a></li>
+						<li><a class="dropdown-item" href="payslip.php"> Payslip</a></li>
 					</ul>
 				</li>
 	          	<li>
@@ -351,7 +351,7 @@
 				   		<li><a class="dropdown-item" href="holiday.php"> Holidays</a></li>
 	            	</ul>
 	         	</li>
-			  	<li><a class="dropdown-item" href="#">Event Setup</a></li>
+			  	<li><a class="dropdown-item" href="event_setup.php">Event Setup</a></li>
 			  	<li><a class="dropdown-item" href="#">Meeting</a></li>
 			  	<li><a class="dropdown-item" href="#">Employees Asset Setup</a></li>
 			  	<li><a class="dropdown-item" href="#">Document Setup</a></li>

@@ -231,7 +231,7 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Promotion</h4>
+                        <h4 class="modal-title">Edit Termination</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 

@@ -86,12 +86,41 @@ if($_GET['del'] == "yes"){
                                   
 	              				<div class="col-lg-6">
                                   <button class="btn btn-sm bg-default float-right margin-28" type="button" data-bs-toggle="modal" data-bs-target="#myModal"><i class="fa fa-plus"></i></button>
-	              					
+                                  <a href="holiday_calender.php" class="btn btn-sm bg-default float-right margin_top-28"><i class="fa fa-calendar"></i></a>
+                                 
 	              				</div>
 	              			</div>
 	              		</div>
 	              		<div class="box-body">
 	              			<!-- <h5 class="second_heading">Add Industry</h5> -->
+                            <form method="post">
+                        <div class="form-group row form_box_shadow">
+                          
+                          <div class="col-lg-12 row">
+                            
+                            <div class="col-md-2 offset-lg-6">
+                              <label>Start Date</label>
+                              <input type="date" name="start_date" id="start_date" class="form-control"  required>
+                            </div>
+
+                            <div class="col-md-2">
+                              <label>End Date</label>
+                              <input type="date" name="end_date" id="end_date" class="form-control"  required>
+                            </div>
+                            
+                            <div class="col-lg-2">
+                              <button type="submit" class="btn btn-sm bg-default margin_top_40" name="search" >
+                                <i class="fa fa-search"></i>
+                              </button>
+                              <a href="employee_attendance.php" title="Reset" class="btn btn-sm btn-danger margin_top_40" data-bs-toggle="tooltip" title="" data-original-title="Reset" data-bs-original-title="Reset">
+                                <i class="fa fa-trash "></i>
+                            </a>
+                           
+                            </div>
+                          </div>
+                          
+                        </div>
+                        </form>
                             <?php include "display_msg.php"; ?>
                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
@@ -105,7 +134,14 @@ if($_GET['del'] == "yes"){
                 </thead>
                 <tbody>
        	<?php $i=1;
-				$sel_rw = mysqli_query($link,"select * from holiday_tbl");
+                if(isset($_POST['start_date'])){
+                    $start_date = $_POST['start_date'];
+                    $end_date = $_POST['end_date'];
+                    $sel_rw = mysqli_query($link,"select * from holiday_tbl where (start_date between '$start_date' and '$end_date') or (end_date between '$start_date' and '$end_date')");
+                }else{
+                    $sel_rw = mysqli_query($link,"select * from holiday_tbl");
+                }
+				
                 
 				while($row = mysqli_fetch_object($sel_rw)){  ?>  
 
@@ -195,7 +231,7 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Promotion</h4>
+                        <h4 class="modal-title">Edit Holiday</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
@@ -225,9 +261,9 @@ if($_GET['del'] == "yes"){
                                     <input type="date" name="end_date" style="width:90%" id="end_date" class="form-control" required>
                                 </div>
                             </div>
-                    </div>
-
                         </div>
+
+                    </div>
                     
 
                     <!-- Modal footer -->
