@@ -3,7 +3,7 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "holiday.php"; ?>
+$page = "holiday"; ?>
 
 
 <?php 
@@ -127,7 +127,7 @@ if($_GET['del'] == "yes"){
                               <button type="submit" class="btn btn-sm bg-default margin_top-28" name="search" >
                                 <i class="fa fa-search"></i>
                               </button>
-                              <a href="employee_attendance.php" title="Reset" class="btn btn-sm btn-danger margin_top-28" data-bs-toggle="tooltip" title="" data-original-title="Reset" data-bs-original-title="Reset">
+                              <a href="holiday_calender.php" title="Reset" class="btn btn-sm btn-danger margin_top-28" data-bs-toggle="tooltip" title="" data-original-title="Reset" data-bs-original-title="Reset">
                                 <i class="fa fa-trash "></i>
                             </a>
                            
@@ -137,7 +137,7 @@ if($_GET['del'] == "yes"){
                         </div>
                         </form>
 <div class="container">
-	
+<?php include "display_msg.php"; ?>
 	<div class="row">
 		<div class="col-md-8 ">
             <div class="form_box_shadow">
@@ -165,13 +165,16 @@ if($_GET['del'] == "yes"){
 		</div>
 		<div class="col-md-4">
         <div class="form_box_shadow">
+        
+            <h5 class="">Meetin List</h5>
+            <div class="margin_top-28"></div>
             <?php 
             if(isset($_POST['start_date'])){
                 $start_date = $_POST['start_date'];
                 $end_date = $_POST['end_date'];
-                $sel_rw = mysqli_query($link,"select * from holiday_tbl where (start_date between '$start_date' and '$end_date') or (end_date between '$start_date' and '$end_date')");
+                $sel_rw = mysqli_query($link,"select * from meeting_tbl where (date between '$start_date' and '$end_date') or (end_date between '$start_date' and '$end_date')");
             }else{
-                $sel_rw = mysqli_query($link,"select * from holiday_tbl limit 5");
+                $sel_rw = mysqli_query($link,"select * from meeting_tbl limit 5");
             }
             
             if(mysqli_num_rows($sel_rw)>0){

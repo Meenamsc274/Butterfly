@@ -369,13 +369,6 @@ if($_GET['del'] == "yes"){
                 });
             });
             
-            $(".branch").change(function(){
-                var branch_id = $(this).val();
-                $.post( "ajax_request/get_department.php", { branch_id: branch_id })
-                .done(function( data ) {
-                    $(".department").html(data);
-                });
-            });
 
             $(".branch").change(function(){
                 var branch_id = $(this).val();

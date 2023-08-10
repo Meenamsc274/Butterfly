@@ -352,10 +352,10 @@
 	            	</ul>
 	         	</li>
 			  	<li><a class="dropdown-item" href="event_setup.php">Event Setup</a></li>
-			  	<li><a class="dropdown-item" href="#">Meeting</a></li>
-			  	<li><a class="dropdown-item" href="#">Employees Asset Setup</a></li>
-			  	<li><a class="dropdown-item" href="#">Document Setup</a></li>
-			  	<li><a class="dropdown-item" href="#">Company Policy</a></li>
+			  	<li><a class="dropdown-item" href="meeting_setup.php">Meeting</a></li>
+			  	<li><a class="dropdown-item" href="emp_asset.php">Employees Asset Setup</a></li>
+			  	<li><a class="dropdown-item" href="document_upload.php">Document Setup</a></li>
+			  	<li><a class="dropdown-item" href="company_policy.php">Company Policy</a></li>
 			  	<li><a class="dropdown-item" href="#">HRM System Setup</a></li>
 	         	<li><hr class="dropdown-divider"></li>	 
           	</ul>

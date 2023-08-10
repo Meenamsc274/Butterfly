@@ -3,7 +3,7 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "holiday.php"; ?>
+$page = "holiday"; ?>
 <?php 
 
 if(isset($_POST['submit'])){

@@ -142,3 +142,6 @@ hr{
 .main_color{
   color :  var(--main-color);
 }
+.font_size_13{
+  font-size: 13px;
+}
