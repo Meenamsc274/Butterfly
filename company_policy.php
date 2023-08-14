@@ -73,7 +73,12 @@ if(isset($_POST['submit'])){
                     $upload_pic = $uploaddir.$secondname.$file;     
                     
                     move_uploaded_file($_FILES['file']['tmp_name'], $upload_pic);
+                    //echo "select file from policy_tbl where autoid='$autoid'";
+                    list($file_url) = mysqli_fetch_row(mysqli_query($link,"select file from policy_tbl where autoid='$autoid'"));
+                    //echo $file_url;
+                   // exit();
                     mysqli_query($link,"UPDATE policy_tbl SET `file` = '$upload_pic' WHERE autoid ='$autoid'");
+                    unlink($file_url);
                 } 
                 $msg[] = "Successfully Updated!";
             
@@ -85,10 +90,11 @@ if(isset($_POST['submit'])){
 }
 
 
-
 if($_GET['del'] == "yes"){
 	$autoid=$_GET['autoid'];
+    list($file_url) = mysqli_fetch_row(mysqli_query($link,"select file from policy_tbl where autoid='$autoid'"));
     if(mysqli_query($link,"delete from `policy_tbl` where `autoid`='$autoid'")){
+        unlink($file_url);
 		header("location:company_policy.php");
 	}
 	else
@@ -124,7 +130,7 @@ if($_GET['del'] == "yes"){
                                     <div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Manage Company Policy </a> 
+		              					<a href="#" class="breadcrumb_a"> Company Policy </a> 
 	              					</div>
                                 </div>
                                     </h3> 
@@ -157,7 +163,7 @@ if($_GET['del'] == "yes"){
                 
 				while($row = mysqli_fetch_object($sel_rw)){ 
                     $branch = $row->branch; 
-                    list($branch_name) = mysqli_fetch_row(mysqli_query($link,"select branch_name from branch_tbl where branch_id = '$branch_id'")); ?>
+                    list($branch_name) = mysqli_fetch_row(mysqli_query($link,"select branch_name from branch_tbl where branch_id = '$branch'")); ?>
 
                 <tr>
 				    <td><?php echo $i; ?></td>
@@ -211,6 +217,7 @@ if($_GET['del'] == "yes"){
                                 <div class="form-group row">
                                     <label  for="industry_id">Branch</label>
                                     <select name="branch" style="width:90%" class="form-control" required>
+                                        <option value="">Select Branch</option>
                                         <?php $sel_branch = mysqli_query($link,"select branch_id,branch_name from branch_tbl"); 
                                         while($fet_branch = mysqli_fetch_object($sel_branch)){
                                             ?><option value="<?php echo $fet_branch->branch_id; ?>"><?php echo $fet_branch->branch_name; ?></option><?php
@@ -279,13 +286,14 @@ if($_GET['del'] == "yes"){
                                 <div class="form-group row">
                                     <label  for="industry_id">Branch</label>
                                     <select name="branch" style="width:90%" id="branch" class="form-control" required>
+                                        <option value="">Select Branch</option>
                                         <?php $sel_branch = mysqli_query($link,"select branch_id,branch_name from branch_tbl"); 
                                         while($fet_branch = mysqli_fetch_object($sel_branch)){
                                             ?><option value="<?php echo $fet_branch->branch_id; ?>"><?php echo $fet_branch->branch_name; ?></option><?php
                                         } ?>
                                         
                                     </select>
-                                    <input type="hidden" name="autoid" id="autoid">
+                                    <input type="hidden" name="autoid" class="autoid">
                                 </div>
                             </div>
 
@@ -307,6 +315,7 @@ if($_GET['del'] == "yes"){
                                 <div class="form-group row">
                                     <label  for="industry_id"> Attachment</label>
                                     <input type="file" style="width:90%" name="file" class="form-control" required>
+                                    <img src="" id="file" style="width: 100px;">
                                 </div>
                             </div>
 
@@ -341,7 +350,7 @@ if($_GET['del'] == "yes"){
               
                 var id_name = $(this).attr("id");
                 var id = id_name.substr(4);
-                var url = 'ajax_request/get_document.php'; 
+                var url = 'ajax_request/get_companyPolicy.php'; 
                 $.ajax({
                     url : url,
                     type: "POST",
@@ -351,8 +360,9 @@ if($_GET['del'] == "yes"){
                     {
                     //if success close modal and reload ajax table
                         $('.autoid').val(data.autoid);
-                        $('#name').val(data.name);
-                        $('#role').val(data.role);
+                        $('#title').val(data.title);
+                        
+                        $("#branch option[value='"+ data.branch +"']").attr("selected", "selected");
                         $('#file').attr("src", data.file);
                         $('#description').val(data.description); 
 

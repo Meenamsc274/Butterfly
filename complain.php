@@ -80,7 +80,7 @@ if($_GET['del'] == "yes"){
                                     <div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Manage Complain </a> 
+		              					<a href="#" class="breadcrumb_a"> Complain </a> 
 	              					</div>
                                 </div>
                                     </h3> 

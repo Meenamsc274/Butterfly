@@ -73,7 +73,9 @@ if(isset($_POST['submit'])){
                     $upload_pic = $uploaddir.$secondname.$file;     
                     
                     move_uploaded_file($_FILES['file']['tmp_name'], $upload_pic);
+                    list($file_url) = mysqli_fetch_row(mysqli_query($link,"select file from policy_tbl where autoid='$autoid'"));
                     mysqli_query($link,"UPDATE document_tbl SET `file` = '$upload_pic' WHERE autoid ='$autoid'");
+                    unlink($file_url);
                 } 
                 $msg[] = "Successfully Updated!";
             
@@ -88,7 +90,9 @@ if(isset($_POST['submit'])){
 
 if($_GET['del'] == "yes"){
 	$autoid=$_GET['autoid'];
+    list($file_url) = mysqli_fetch_row(mysqli_query($link,"select file from policy_tbl where autoid='$autoid'"));
     if(mysqli_query($link,"delete from `document_tbl` where `autoid`='$autoid'")){
+        unlink($file_url);
 		header("location:document_upload.php");
 	}
 	else
@@ -124,7 +128,7 @@ if($_GET['del'] == "yes"){
                                     <div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Manage Document </a> 
+		              					<a href="#" class="breadcrumb_a"> Document </a> 
 	              					</div>
                                 </div>
                                     </h3> 

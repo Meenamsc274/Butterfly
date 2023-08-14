@@ -311,9 +311,9 @@
 	          	<li>
             		<a class="dropdown-item" href="#"> Performance Setup &raquo;  </a>
 					<ul class="dropdown-menu scrollable-menu dropdown-submenu">
-						<li><a class="dropdown-item" href="#"> Indicator</a></li>
-						<li><a class="dropdown-item" href="#"> Appraisal</a></li>
-						<li><a class="dropdown-item" href="#"> Goal Tracking</a></li>
+						<li><a class="dropdown-item" href="indicator.php"> Indicator</a></li>
+						<li><a class="dropdown-item" href="appraisal.php"> Appraisal</a></li>
+						<li><a class="dropdown-item" href="goal_tracking.php"> Goal Tracking</a></li>
 					</ul>
 	          	</li>
 	         	<li>
@@ -356,8 +356,8 @@
 			  	<li><a class="dropdown-item" href="emp_asset.php">Employees Asset Setup</a></li>
 			  	<li><a class="dropdown-item" href="document_upload.php">Document Setup</a></li>
 			  	<li><a class="dropdown-item" href="company_policy.php">Company Policy</a></li>
-			  	<li><a class="dropdown-item" href="#">HRM System Setup</a></li>
-	         	<li><hr class="dropdown-divider"></li>	 
+			  	<li><a class="dropdown-item" href="branch.php">HRM System Setup</a></li>
+	         	
           	</ul>
         </li>
 		
