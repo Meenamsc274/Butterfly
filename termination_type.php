@@ -3,7 +3,7 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "payslip_type"; ?>
+$page = "termination_type"; ?>
 <?php 
 
 if(isset($_POST['submit'])){
@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
         $autoid = mysqli_real_escape_string($link,$_POST['autoid']);
         $name  = mysqli_real_escape_string($link,$_POST['name']);
        
-        if(mysqli_query($link,"INSERT INTO `payslip_type_tbl` ( `autoid`, `name`, `date`, `created_by`, `approved_by`) VALUES ( '$autoid', '$name', NOW(), '$created_by', '$approved_by')")){
+        if(mysqli_query($link,"INSERT INTO `termination_type_tbl` ( `autoid`, `name`, `date`, `created_by`, `approved_by`) VALUES ( '$autoid', '$name', NOW(), '$created_by', '$approved_by')")){
             $msg[] = "Successfully Saved!";
             
         }
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         $name = mysqli_real_escape_string($link,$_POST['name']);
        
 
-        if(mysqli_query($link,"update `payslip_type_tbl` set `name`='$name',  `date`= NOW(), `created_by`='$created_by', `approved_by`='$approved_by' where autoid = '$autoid'")){
+        if(mysqli_query($link,"update `termination_type_tbl` set `name`='$name',  `date`= NOW(), `created_by`='$created_by', `approved_by`='$approved_by' where autoid = '$autoid'")){
             $msg[] = "Successfully Updated!";
         }
         else
@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
 
 if($_GET['del'] == "yes"){
 	$autoid=$_GET['autoid'];
-    if(mysqli_query($link,"delete from `payslip_type_tbl` where `autoid`='$autoid'")){
+    if(mysqli_query($link,"delete from `termination_type_tbl` where `autoid`='$autoid'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
@@ -71,11 +71,11 @@ if($_GET['del'] == "yes"){
 	              		<div class="box-header">
 	              			<div class="row">
 	              				<div class="col-lg-6">
-                                    <h3 class="box-heading">Manage Payslip Type
+                                    <h3 class="box-heading">Manage Termination Type
                                     <div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Payslip Type </a> 
+		              					<a href="#" class="breadcrumb_a">Award ype </a> 
 	              					</div>
                                 </div>
                                     </h3> 
@@ -101,13 +101,13 @@ if($_GET['del'] == "yes"){
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th> Payslip Type </th>
+                                                    <th> Termination Type </th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php $i=1;
-                                                $sel_rw = mysqli_query($link,"select * from payslip_type_tbl");
+                                                $sel_rw = mysqli_query($link,"select * from termination_type_tbl");
                                                 while($row = mysqli_fetch_object($sel_rw)){   ?>
 
                                                 <tr>
@@ -116,7 +116,7 @@ if($_GET['del'] == "yes"){
                                                    
                                                     <td>
                                                     <button class="btn btn-sm btn-success edit" id="edit<?php echo $row->autoid  ; ?>"  type="button" data-bs-toggle="modal" data-bs-target="#myModalEdit"><i class="fa fa-edit"></i></button>
-                                                        <a class="btn btn-sm bg-danger text-white" href="payslip_type.php?autoid=<?php echo $row->autoid ; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
+                                                        <a class="btn btn-sm bg-danger text-white" href="termination_type.php?autoid=<?php echo $row->autoid ; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
                                                     </td>
                                                 </tr>
                                                 <?php $i++; } ?>
@@ -138,23 +138,23 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Create New Payslip Type</h4>
+                        <h4 class="modal-title">Create New Termination Type</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form method="post" action="payslip_type.php" class="padding-10" enctype="multipart/form-data">
-                        <?php   $max_id = maxOfAll("id","payslip_type_tbl");
+                    <form method="post" action="termination_type.php" class="padding-10" enctype="multipart/form-data">
+                        <?php   $max_id = maxOfAll("id","termination_type_tbl");
                                 $max_id=$max_id+1;
-                                $upload_id="PT-".$max_id;
+                                $upload_id="TER-".$max_id;
                          ?>
                         <div class="row">
                        
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
                                 <div class="form-group row">
                                     <label  for="industry_id">Name</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Enter Payslip Type Name" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter Termination Type Name" required>
                                     <input type="hidden" name="autoid" value="<?php echo $upload_id; ?>">
                                 </div>
                             </div>    
@@ -182,19 +182,19 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Payslip Type</h4>
+                        <h4 class="modal-title">Edit Termination Type</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form method="post" action="payslip_type.php" class="padding-10" enctype="multipart/form-data">
+                    <form method="post" action="termination_type.php" class="padding-10" enctype="multipart/form-data">
                        
                         <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
                             <div class="form-group row">
                             <label  for="industry_id">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Payslip Type Name" required>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Termination Type Name" required>
 
                                 <input type="hidden" name="autoid" id="autoid" class="autoid">
                             </div>
@@ -228,7 +228,7 @@ if($_GET['del'] == "yes"){
             $('.edit').click(function(){
                 var id_name = $(this).attr("id");
                 var id = id_name.substr(4);
-                var url = 'ajax_request/get_payslipType.php';
+                var url = 'ajax_request/get_terminationType.php';
                 $.ajax({
                     url : url,
                     type: "POST",

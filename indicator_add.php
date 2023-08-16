@@ -132,15 +132,16 @@ echo $autoid;
                 <div class="box">
                     <div class="box-header">
                       <div class="row">
-                        <div class="col-lg-6"><h3 class="box-heading"> Indicator <small>Add / Update  Details</small></h3></h3></div>
-                        <div class="col-lg-6">
-                          <div class="breadcrumb">
+                        <div class="col-lg-6"><h3 class="box-heading"> Indicator <small>Add / Update  Details</small>
+                        <div class="breadcrumb">
                             <a href="index.php" class="breadcrumb_a">Home</a> 
                             <i class="fa fa-angle-double-right angle_double_right"></i>
                             <a href="indicator.php" class="breadcrumb_a">Indicator </a> 
                             <i class="fa fa-angle-double-right angle_double_right" aria-hidden="true"></i>
                             <a href="#" class="breadcrumb_a">Add / Update Indicator </a>
-                          </div>
+                          </div></h3></div>
+                        <div class="col-lg-6">
+                          
                         </div>
                       </div>
                     </div>

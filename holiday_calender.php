@@ -166,15 +166,16 @@ if($_GET['del'] == "yes"){
 		<div class="col-md-4">
         <div class="form_box_shadow">
         
-            <h5 class="">Meetin List</h5>
+            <h5 class="">Holiday List</h5>
             <div class="margin_top-28"></div>
             <?php 
             if(isset($_POST['start_date'])){
                 $start_date = $_POST['start_date'];
                 $end_date = $_POST['end_date'];
-                $sel_rw = mysqli_query($link,"select * from meeting_tbl where (date between '$start_date' and '$end_date') or (end_date between '$start_date' and '$end_date')");
+               
+                $sel_rw = mysqli_query($link,"select * from holiday_tbl where (start_date between '$start_date' and '$end_date') or (end_date between '$start_date' and '$end_date')");
             }else{
-                $sel_rw = mysqli_query($link,"select * from meeting_tbl limit 5");
+                $sel_rw = mysqli_query($link,"select * from holiday_tbl limit 5");
             }
             
             if(mysqli_num_rows($sel_rw)>0){

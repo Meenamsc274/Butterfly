@@ -2,7 +2,7 @@
 include 'dbc.php'; 
 page_protect();
 $created_by = $_SESSION['userid'];
-$approved_by = "";
+$approved_by = ""; 
 ?>
 <?php
 if($_POST['submit'] == "Submit"){
@@ -46,6 +46,7 @@ if(mysqli_query($link,"INSERT INTO `employee` (`name`, `phone`, `dob`, `gender`,
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['certificate']['tmp_name'],$new_filename));
+    mysqli_query($link,"update `employee` set certificate='$new_filename' where `emp_id`='$emp_id'");
 	}
 	$fname = $_FILES['photo']['name'];
 	if($fname != ""){
@@ -61,6 +62,7 @@ if(mysqli_query($link,"INSERT INTO `employee` (`name`, `phone`, `dob`, `gender`,
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['photo']['tmp_name'],$new_filename1));
+    mysqli_query($link,"update `employee` set photo='$new_filename1' where `emp_id`='$emp_id'");
 	}
 	$fname = $_FILES['resume']['name'];
 	if($fname != ""){
@@ -76,10 +78,11 @@ if(mysqli_query($link,"INSERT INTO `employee` (`name`, `phone`, `dob`, `gender`,
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['resume']['tmp_name'],$new_filename2));
+    mysqli_query($link,"update `employee` set resume='$new_filename2' where `emp_id`='$emp_id'");
 	}
 	//Insert or Update statement to be included here
 	//echo"update `employee` set certificate='$new_filename',photo='$new_filename1',resume='$new_filename2' where `emp_id`='$emp_id'";
-	mysqli_query($link,"update `employee` set certificate='$new_filename',photo='$new_filename1',resume='$new_filename2' where `emp_id`='$emp_id'");
+
 	
 	$msg[] = "Successfully Saved!";
 	}
@@ -114,8 +117,7 @@ $bank_ifsc = mysqli_real_escape_string($link,$_POST['bank_ifsc']);
 $branch_location = mysqli_real_escape_string($link,$_POST['branch_location']);
 $tax_payer = mysqli_real_escape_string($link,$_POST['tax_payer']);
 if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone', `dob` = '$dob', `gender` = '$gender', `address` = '$address', `email` = '$email', `branch` = '$branch', `department` = '$department', `designation` = '$designation', `doj` = '$doj', `acc_holder` = '$acc_holder', `acc_no` = '$acc_no', `bank_name` = '$bank_name', `bank_ifsc`='$bank_ifsc', `branch_location` = '$branch_location', `tax_payer` = '$tax_payer' WHERE `emp_id`='$emp_id'")){
-	
-	
+
 	
 	$fname = $_FILES['certificate']['name'];
 	if($fname != ""){
@@ -131,12 +133,13 @@ if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['certificate']['tmp_name'],$new_filename));
+    mysqli_query($link,"update `employee` set certificate='$new_filename' where `emp_id`='$emp_id'");
 	}
-	$fname = $_FILES['photo']['name'];
-	if($fname != ""){
+	$fname1 = $_FILES['photo']['name'];
+	if($fname1 != ""){
 	$upload_dir = "uploads/employee/photo/";
     $ftype = $_FILES['photo']['type'];
-    $filename_part = explode(".", $fname);
+    $filename_part = explode(".", $fname1);
 	$upload_name = $filename_part[0];
 	$ext = $filename_part[1];
 	$max_id = maxOfAll("id","employee");
@@ -146,12 +149,14 @@ if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['photo']['tmp_name'],$new_filename1));
+    mysqli_query($link,"update `employee` set photo='$new_filename1' where `emp_id`='$emp_id'");
 	}
-	$fname = $_FILES['resume']['name'];
-	if($fname != ""){
+
+	$fname2 = $_FILES['resume']['name'];
+	if($fname2 != ""){
 	$upload_dir = "uploads/employee/resume/";
     $ftype = $_FILES['resume']['type'];
-    $filename_part = explode(".", $fname);
+    $filename_part = explode(".", $fname2);
 	$upload_name = $filename_part[0];
 	$ext = $filename_part[1];
 	$max_id = maxOfAll("id","employee");
@@ -161,12 +166,13 @@ if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone
 	$page="";
 	$title="";
     $movetofolder = (@copy($_FILES['resume']['tmp_name'],$new_filename2));
+    mysqli_query($link,"update `employee` set resume='$new_filename2' where `emp_id`='$emp_id'");
 	}
 	//Insert or Update statement to be included here
 	//echo"update `employee` set certificate='$new_filename',photo='$new_filename1',resume='$new_filename2' where `emp_id`='$emp_id'";
-	mysqli_query($link,"update `employee` set certificate='$new_filename',photo='$new_filename1',resume='$new_filename2' where `emp_id`='$emp_id'");
+	
 
-	$msg[] = "Successfully Saved!";
+	$msg[] = "Successfully Updated!";
 	}
 	else
 	{
@@ -197,15 +203,19 @@ if(mysqli_query($link,"UPDATE `employee` SET `name` = '$name', `phone` = '$phone
                 <div class="box">
                     <div class="box-header">
                       <div class="row">
-                        <div class="col-lg-6"><h3 class="box-heading"> Employee <small>Add / Update  Details</small></h3></h3></div>
-                        <div class="col-lg-6">
-                          <div class="breadcrumb">
+                        <div class="col-lg-6"><h3 class="box-heading"> Employee <small>Add / Update  Details</small>
+                        <div class="breadcrumb">
                             <a href="index.php" class="breadcrumb_a">Home</a> 
                             <i class="fa fa-angle-double-right angle_double_right"></i>
                             <a href="employee_view.php" class="breadcrumb_a">Employee </a> 
                             <i class="fa fa-angle-double-right angle_double_right" aria-hidden="true"></i>
                             <a href="#" class="breadcrumb_a">Add / Update Employee </a>
                           </div>
+                      </h3>
+                        
+                        </div>
+                        <div class="col-lg-6">
+                          
                         </div>
                       </div>
                     </div>
@@ -277,7 +287,7 @@ $emp_id = $_GET['emp_id'];
     <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
       <div class="form-group row">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
-        <label class="margin-left-10" for="industry_name">DoB</label>
+        <label class="margin-left-10" for="industry_name">DOB</label>
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
           <input type="date" class="form-control" name="dob" id="dob" placeholder="Enter DoB" value="<?php echo $row5->dob; ?>"  min="0" max="0" required="required">
@@ -290,8 +300,8 @@ $emp_id = $_GET['emp_id'];
         <label class="margin-left-10" for="industry_name">Gender</label>
          </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
-         <input type="radio"  name="gender" id="gender"  value="Male"  > Male
-         <input type="radio" name="gender" id="gender"  value="Female"  > Female
+         <input type="radio"  name="gender" id="gender"  value="Male" <?php if($row5->gender=='Male'){ echo 'checked'; } ?> > Male
+         <input type="radio" name="gender" id="gender"  value="Female"  <?php if($row5->gender=='Female'){ echo 'checked'; } ?> > Female
         </div>
       </div>
     </div>
@@ -377,7 +387,7 @@ $emp_id = $_GET['emp_id'];
 				while($row1 = mysqli_fetch_object($sel_rw1)){
 				?>
 
-				<option value="<?php echo $row1->designation_name; ?>"><?php echo $row1->designation_name; ?></option>
+				<option value="<?php echo $row1->designation_id ; ?>"><?php echo $row1->designation_name; ?></option>
 
 				<?php } ?>
 				</select>
@@ -549,7 +559,7 @@ $emp_id = $_GET['emp_id'];
       <div>&nbsp;</div>
       <div style="border-top: 1px solid #ced4da;">&nbsp;</div>
        <center>
-       <?php if($update == "yes"){ ?>
+       <?php if($Update == "yes"){ ?>
         <input type="submit" name="submit" id="submit" class="btn btn-success" value="Update">
        <?php } else { ?>
         <input type="submit" name="submit" id="submit" class="btn btn-success" value="Submit">
@@ -571,18 +581,12 @@ $emp_id = $_GET['emp_id'];
   <?php include 'assets/common/js_file.php';?> 
   <script>
 $(document).ready(function() {
-$("#gender option[value='<?php echo $row5->gender; ?>']").attr("checked", "checked");
-$("#branch_id option[value='<?php echo $row1->branch_id; ?>']").attr("selected", "selected");
-$("#category option[value='<?php echo $row1->category; ?>']").attr("selected", "selected");
-$("#sub_category option[value='<?php echo $row1->sub_category; ?>']").attr("selected", "selected");
-$("#brand_id option[value='<?php echo $row1->brand_id; ?>']").attr("selected", "selected");
-$("#unit option[value='<?php echo $row1->unit; ?>']").attr("selected", "selected");
-$("#tax option[value='<?php echo $row1->tax; ?>']").attr("selected", "selected");
-$("#batch_stock option[value='<?php echo $row1->batch_stock; ?>']").attr("selected", "selected");
-$("#stockable option[value='<?php echo $row1->stockable; ?>']").attr("selected", "selected");
-$("#price_changeable option[value='<?php echo $row1->price_changeable; ?>']").attr("selected", "selected");
-$("#show option[value='<?php echo $row1->show; ?>']").attr("selected", "selected");
-$("#status option[value='<?php echo $row1->status; ?>']").attr("selected", "selected");
+
+$("#branch option[value='<?php echo $row5->branch; ?>']").attr("selected", "selected");
+
+$("#department option[value='<?php echo $row5->department; ?>']").attr("selected", "selected");
+$("#designation option[value='<?php echo $row5->designation; ?>']").attr("selected", "selected");
+
 });
 </script>
  

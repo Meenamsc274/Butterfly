@@ -20,9 +20,14 @@
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
           <select name="payroll_type" id="payroll_type" class="form-control">
-		  <option value="Monthly Payslip">Monthly Payslip</option>
-		  <option value="Hourly Payslip">Hourly Payslip</option>
-		  </select>
+            <?php 
+            $sel_rw1 = mysqli_query($link,"select * from payslip_type_tbl");
+            while($row_payslip = mysqli_fetch_object($sel_rw1)){ ?>
+
+            <option value="<?php echo $row_payslip->autoid ; ?>"><?php echo $row_payslip->name; ?></option>
+
+            <?php } ?>
+		    </select>
         </div>
       </div>
     </div>
@@ -60,7 +65,7 @@
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Allowance</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Allowance</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -83,23 +88,28 @@ $emp_id = $_GET['emp_id'];
       <div class="modal-body">
 	   <form method="post" class="padding-10" enctype="multipart/form-data">
 	        <div class="row">
-			 <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" readonly  >
+			 <input type="hidden" class="form-control" name="autoid" id="allowance_autoid" value="<?php echo $upload_id; ?>" readonly  >
        
        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Allowance Options </label>
+        <label class="" for="industry_name">Allowance Options </label>
          <select name="allowance_type" id="allowance_type" class="form-control" style="width:90%;">
-		  <option value="Non Taxable">Non Taxable</option>
-		  <option value="Taxables">Taxables</option>
-		  </select>
+         <?php 
+            $sel_rw1 = mysqli_query($link,"select * from allowance_option_tbl");
+            while($row_allowance = mysqli_fetch_object($sel_rw1)){ ?>
+
+            <option value="<?php echo $row_allowance->autoid ; ?>"><?php echo $row_allowance->name; ?></option>
+
+            <?php } ?>
+		    </select>
       </div>
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Title</label>
+        <label class="" for="industry_id">Title</label>
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $row5->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="allowance_title" value="<?php echo $row5->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
@@ -107,8 +117,8 @@ $emp_id = $_GET['emp_id'];
 	<div class="row">
        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Type </label>
-         <select name="type" id="type" class="form-control" style="width:90%;">
+        <label class="" for="industry_name">Type </label>
+         <select name="type" id="allowance_type1" class="form-control" style="width:90%;">
 		  <option value="Fixed">Fixed</option>
 		  <option value="Percentage">Percentage</option>
 		  </select>
@@ -116,8 +126,8 @@ $emp_id = $_GET['emp_id'];
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Amount</label>
-        <input type="number" class="form-control" name="amount" id="amount" value="<?php echo $row5->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
+        <label class="" for="industry_id">Amount</label>
+        <input type="number" class="form-control" name="amount" id="allowance_amount" value="<?php echo $row5->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
        
       </div>
     </div>
@@ -129,12 +139,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="submit" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="submit" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
-	  
+      
+        <input type="submit" name="submit" id="allowance_submit" class="btn btn-success" value="Create" style="float:right">
+      
        </form>
 	  </div>
 
@@ -149,7 +156,7 @@ $emp_id = $_GET['emp_id'];
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Commission</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Commission</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -175,11 +182,11 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Title</label>
-         <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
+        <label class="" for="industry_id">Title</label>
+         <input type="hidden" class="form-control" name="autoid" id="commission_autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $row6->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="commission_title" value="<?php echo $row6->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
@@ -187,8 +194,8 @@ $emp_id = $_GET['emp_id'];
 	<div class="row">
        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Type </label>
-         <select name="type" id="type1" class="form-control" style="width:90%;">
+        <label class="" for="industry_name">Type </label>
+         <select name="type" id="commission_type" class="form-control" style="width:90%;">
 		  <option value="Fixed">Fixed</option>
 		  <option value="Percentage">Percentage</option>
 		  </select>
@@ -196,8 +203,8 @@ $emp_id = $_GET['emp_id'];
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Amount</label>
-        <input type="number" class="form-control" name="amount" id="amount" value="<?php echo $row6->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
+        <label class="" for="industry_id">Amount</label>
+        <input type="number" class="form-control" name="amount" id="commission_amount" value="<?php echo $row6->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
        
       </div>
     </div>
@@ -209,11 +216,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="submit2" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="submit2" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
+      
+        <input type="submit" name="submit2" id="commission_submit" class="btn btn-success" value="Create" style="float:right">
+       
 	  
        </form>
 	  </div>
@@ -229,7 +234,7 @@ $emp_id = $_GET['emp_id'];
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Loan</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Loan</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -257,11 +262,11 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Title</label>
-         <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
+        <label class="" for="industry_id">Title</label>
+         <input type="hidden" class="form-control" name="autoid" id="loan_autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $loan_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="loan_title" value="<?php echo $loan_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
@@ -269,19 +274,22 @@ $emp_id = $_GET['emp_id'];
 	<div class="row">
        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Loan Options </label>
+        <label  for="industry_name">Loan Options </label>
          <select name="loan_option" id="loan_option" class="form-control" style="width:90%;">
-		  <option value="Health Insurance">Health Insurance</option>
-		  <option value="Other Insurance">Other Insurance</option>
-		  <option value="Personal Loan">Personal Loan</option>
-		  <option value="Home Loan">Home Loan</option>
+          <?php 
+            $sel_rw1 = mysqli_query($link,"select * from loan_option_tbl");
+            while($row_loan = mysqli_fetch_object($sel_rw1)){ ?>
+
+            <option value="<?php echo $row_loan->autoid ; ?>"><?php echo $row_loan->name; ?></option>
+
+          <?php } ?>
 		  </select>
       </div>
     </div> 
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Type </label>
-         <select name="type" id="type2" class="form-control" style="width:90%;">
+        <label  for="industry_name">Type </label>
+         <select name="type" id="loan_type" class="form-control" style="width:90%;">
 		  <option value="Fixed">Fixed</option>
 		  <option value="Percentage">Percentage</option>
 		  </select>
@@ -291,8 +299,8 @@ $emp_id = $_GET['emp_id'];
 	<div class="row">
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Amount</label>
-        <input type="number" class="form-control" name="amount" id="amount" value="<?php echo $loan_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
+        <label for="industry_id">Amount</label>
+        <input type="number" class="form-control" name="amount" id="loan_amount" value="<?php echo $loan_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
        
       </div>
     </div>
@@ -300,8 +308,8 @@ $emp_id = $_GET['emp_id'];
 	<div class="row">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Reason</label>
-        <textarea class="form-control" name="reason" id="reason"><?php echo $loan_row->reason;?></textarea>
+        <label  for="industry_id">Reason</label>
+        <textarea class="form-control" name="reason" id="loan_reason"><?php echo $loan_row->reason;?></textarea>
        
       </div>
     </div>
@@ -313,11 +321,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="submit1" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="submit1" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
+      
+        <input type="submit" name="submit1" id="loan_submit" class="btn btn-success" value="Create" style="float:right">
+      
 	  
        </form>
 	  </div>
@@ -333,7 +339,7 @@ $emp_id = $_GET['emp_id'];
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Saturation Deduction</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Saturation Deduction</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -361,30 +367,35 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Title</label>
-         <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
+        <label class="" for="industry_id">Title</label>
+         <input type="hidden" class="form-control" name="autoid" id="deduction_autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $deduction_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="deduction_title" value="<?php echo $deduction_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
 	 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Deduction Options </label>
+        <label class="" for="industry_name">Deduction Options </label>
          <select name="deduction_option" id="deduction_option" class="form-control" style="width:90%;">
-		  <option value="Mutual Fund">Mutual Fund</option>
-		  <option value="Social Security System">Social Security System</option>
-		  </select>
-      </div>
+         <?php 
+            $sel_rw1 = mysqli_query($link,"select * from deduction_option_tbl");
+            while($row_deduction = mysqli_fetch_object($sel_rw1)){ ?>
+
+            <option value="<?php echo $row_deduction->autoid ; ?>"><?php echo $row_deduction->name; ?></option>
+
+          <?php } ?>
+		    </select>
+      </div> 
     </div> 
     </div> 
 	<div class="row">
        
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Type </label>
-         <select name="type" id="type3" class="form-control" style="width:90%;">
+        <label class="" for="industry_name">Type </label>
+         <select name="type" id="deduction_type" class="form-control" style="width:90%;">
 		  <option value="Fixed">Fixed</option>
 		  <option value="Percentage">Percentage</option>
 		  </select>
@@ -392,8 +403,8 @@ $emp_id = $_GET['emp_id'];
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Amount</label>
-        <input type="number" class="form-control" name="amount" id="amount" value="<?php echo $deduction_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
+        <label class="" for="industry_id">Amount</label>
+        <input type="number" class="form-control" name="amount" id="deduction_amount" value="<?php echo $deduction_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
        
       </div>
     </div>
@@ -405,12 +416,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="deduct" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="deduct" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
-	  
+      
+        <input type="submit" name="deduct" id="deduction_submit" class="btn btn-success" value="Create" style="float:right">
+      
        </form>
 	  </div>
 
@@ -425,7 +433,7 @@ $emp_id = $_GET['emp_id'];
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Other Payment</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Other Payment</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -453,11 +461,11 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Title</label>
-         <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
+        <label class="" for="industry_id">Title</label>
+         <input type="hidden" class="form-control" name="autoid" id="other_payment_autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $other_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="other_payment_title" value="<?php echo $other_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
@@ -466,8 +474,8 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Type </label>
-         <select name="type" id="type4" class="form-control" style="width:90%;">
+        <label class="" for="industry_name">Type </label>
+         <select name="type" id="other_payment_type" class="form-control" style="width:90%;">
 		  <option value="Fixed">Fixed</option>
 		  <option value="Percentage">Percentage</option>
 		  </select>
@@ -475,8 +483,8 @@ $emp_id = $_GET['emp_id'];
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Amount</label>
-        <input type="number" class="form-control" name="amount" id="amount" value="<?php echo $other_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
+        <label class="" for="industry_id">Amount</label>
+        <input type="number" class="form-control" name="amount" id="other_payment_amount" value="<?php echo $other_row->amount; ?>" placeholder="Enter the Amount" style="width:90%;">
        
       </div>
     </div>
@@ -488,11 +496,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="other" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="other" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
+      
+        <input type="submit" name="other" id="other_payment_submit" class="btn btn-success" value="Create" style="float:right">
+     
 	  
        </form>
 	  </div>
@@ -508,7 +514,7 @@ $emp_id = $_GET['emp_id'];
 
       <!-- Modal Header -->
       <div class="modal-header">
-        <h4 class="modal-title">Create Overtime</h4>
+        <h4 class="modal-title"><span class="modal_title">Create</span> Overtime</h4>
         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
       </div>
   <?php
@@ -536,19 +542,19 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Overtime Title</label>
-         <input type="hidden" class="form-control" name="autoid" id="autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
+        <label class="" for="industry_id">Overtime Title</label>
+         <input type="hidden" class="form-control" name="autoid" id="overtime_autoid" value="<?php echo $upload_id; ?>" placeholder="Enter the Salary"  >
          <input type="hidden" class="form-control" name="emp_id" id="emp_id" value="<?php echo $emp_id; ?>" placeholder="Enter the Salary"  >
        <input type="hidden" class="form-control" name="emp_name" id="emp_name" value="<?php echo $row->employee_name; ?>" placeholder="Enter the Salary"  >
-       <input type="text" class="form-control" name="title" id="title" value="<?php echo $overtime_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
+       <input type="text" class="form-control" name="title" id="overtime_title" value="<?php echo $overtime_row->title; ?>" placeholder="Enter the Title" style="width:90%;">
        
       </div>
     </div>
 	
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_name">Number of Days </label>
-          <input type="number" class="form-control" name="days" id="days" value="<?php echo $overtime_row->days; ?>" placeholder="Enter Days" style="width:90%;">
+        <label class="" for="industry_name">Number of Days </label>
+          <input type="number" class="form-control" name="days" id="overtime_days" value="<?php echo $overtime_row->days; ?>" placeholder="Enter Days" style="width:90%;">
        
       </div>
     </div>
@@ -557,15 +563,15 @@ $emp_id = $_GET['emp_id'];
        
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Hours</label>
-        <input type="number" class="form-control" name="hours" id="hours" value="<?php echo $overtime_row->hours; ?>" placeholder="Enter the Hours" style="width:90%;">
+        <label class="" for="industry_id">Hours</label>
+        <input type="number" class="form-control" name="hours" id="overtime_hours" value="<?php echo $overtime_row->hours; ?>" placeholder="Enter the Hours" style="width:90%;">
        
       </div>
     </div>
 	<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 no-pad">
       <div class="form-group row">
-        <label class="margin-left-10" for="industry_id">Rate</label>
-        <input type="number" class="form-control" name="rate" id="rate" value="<?php echo $overtime_row->rate; ?>" placeholder="Enter the Rate" style="width:90%;">
+        <label class="" for="industry_id">Rate</label>
+        <input type="number" class="form-control" name="rate" id="overtime_rate" value="<?php echo $overtime_row->rate; ?>" placeholder="Enter the Rate" style="width:90%;">
        
       </div>
     </div>
@@ -577,11 +583,9 @@ $emp_id = $_GET['emp_id'];
       <!-- Modal footer -->
       <div class="modal-footer">
 	   <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-      <?php if($update == "yes"){ ?>
-        <input type="submit" name="over" id="submit" class="btn btn-success" value="Update">
-       <?php } else { ?>
-        <input type="submit" name="over" id="submit" class="btn btn-success" value="Create" style="float:right">
-       <?php } ?>
+    
+        <input type="submit" name="over" id="overtime_submit" class="btn btn-success" value="Create" style="float:right">
+      
 	  
        </form>
 	  </div>

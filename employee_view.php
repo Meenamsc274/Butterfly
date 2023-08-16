@@ -33,20 +33,24 @@ $page = "employee_view"; ?>
         	<div class="row"> <?php include 'assets/common/left-sidebar.php';?> <div class="col-lg-10">
             	<div class="container box-bg">
             		<div class="box">
-	              		<div class="box-header">
+					<div class="box-header">
 	              			<div class="row">
-	              				<div class="col-lg-6"><h3 class="box-heading"> Employee <small>View Details</small></h3> </div>
 	              				<div class="col-lg-6">
-								
-	              					<div class="breadcrumb">
-									<a href="employee_add.php" class="btn btn-success"style="font-size:10px;margin-right:9px"><i class="fa fa-plus"></i></a> 
-                            			<a href="index.php" class="breadcrumb_a">Home</a> 
+                                    <h3 class="box-heading">Manage Employee
+                                    <div class="breadcrumb">
+	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
 		              					<a href="#" class="breadcrumb_a">Employee </a> 
 	              					</div>
+                                </div>
+                                    </h3> 
+                                  
+	              				<div class="col-lg-6">
+								  <a href="employee_add.php" class="btn btn-sm bg-default float-right margin-28"><i class="fa fa-plus"></i></a> 
 	              				</div>
 	              			</div>
 	              		</div>
+	              		
 	              		<div class="box-body">
 	              			<!-- <h5 class="second_heading">Add Industry</h5> -->
                    <table id="example" class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
@@ -66,19 +70,27 @@ $page = "employee_view"; ?>
         <?php
         $sel_rw = mysqli_query($link,"select * from employee");
         while($row = mysqli_fetch_object($sel_rw)){
+
+			$branch_id = $row->branch;
+			$department_id = $row->department;
+			$designation_id = $row->designation;
+
+			list($branch_name) = mysqli_fetch_row(mysqli_query($link,"select branch_name from branch_tbl where branch_id='$branch_id'"));
+			list($department_name) = mysqli_fetch_row(mysqli_query($link,"select department_name from department_tbl where department_id='$department_id'"));
+			list($designation_name) = mysqli_fetch_row(mysqli_query($link,"select designation_name from designation_tbl where designation_id='$designation_id'"));
         ?>
 
                 <tr>
 					<td><a href="emp_singleview.php?emp_id=<?php echo $row->emp_id; ?>" class="border border-success text-success p-2 rounded" ><?php echo $row->emp_id; ?></a></td>
 					<td><?php echo $row->name; ?></td>
 					<td><?php echo $row->email; ?></td>
-					<td><?php echo $row->branch; ?></td>
-					<td><?php echo $row->department; ?></td>
-					<td><?php echo $row->designation; ?></td>
+					<td><?php echo $branch_name; ?></td>
+					<td><?php echo $department_name; ?></td>
+					<td><?php echo $designation_name; ?></td>
 					<td><?php echo $row->doj; ?></td>
 					<td>
-						<a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&Update=yes" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="employee_view.php?emp_id=<?php echo $row->emp_id; ?>&del=yes" title="Delete Details"><i class="fa fa-trash"></i></a>
+						<a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&Update=yes" title="Edit Details" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+						<a href="employee_view.php?emp_id=<?php echo $row->emp_id; ?>&del=yes" class="btn btn-danger btn-sm" title="Delete Details"><i class="fa fa-trash"></i></a>
 					</td>
         </tr>
         <?php } ?>

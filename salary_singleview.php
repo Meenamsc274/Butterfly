@@ -9,6 +9,38 @@ $page = "salary_view"; ?>
     $sel_rw = mysqli_query($link,"select * from salarydetails_tbl where employee_id='$emp_id'");
     $row = mysqli_fetch_object($sel_rw);
 	
+	if(isset($_GET['del'])){
+		if($_GET['del'] == 'allowance'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from allowance where autoid='$autoid'");
+			$msg = 'Allowance Removed';
+		}
+		if($_GET['del'] == 'commission'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from commission where autoid='$autoid'");
+			$msg = 'Commission Removed';
+		}
+		if($_GET['del'] == 'loan'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from loan where autoid='$autoid'");
+			$msg = 'Loan Removed';
+		}
+		if($_GET['del'] == 'deduction'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from deduction where autoid='$autoid'");
+			$msg = 'Deduction Removed';
+		}
+		if($_GET['del'] == 'other_payment'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from other_payment where autoid='$autoid'");
+			$msg = 'Other Payment Removed';
+		}
+		if($_GET['del'] == 'overtime'){
+			$autoid = $_GET['id'];
+			mysqli_query($link,"delete from overtime where autoid='$autoid'");
+			$msg = 'Overtime Removed';
+		}
+	}
 	?>
 	<?php
 	include "insert.php";
@@ -22,6 +54,7 @@ $page = "salary_view"; ?>
     <?php include 'assets/common/css_file.php';?> 
     
     <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+	
     <style>
 	.box-bg
 	{
@@ -46,19 +79,34 @@ $page = "salary_view"; ?>
             		<div class="box">
 	              		<div class="box-header">
 	              			<div class="row">
-	              				<div class="col-lg-6"><h3 class="box-heading"> Employee Set Salary</h3> </div>
-	              				<div class="col-lg-6">
-								
-	              					<div class="breadcrumb">
+	              				<div class="col-lg-6"><h3 class="box-heading"> Employee Set Salary
+								  <div class="breadcrumb">
 										<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
 		              					<a href="#" class="breadcrumb_a">Employee Set Salary </a> 
 	              					</div>
+								</h3> 
+							</div>
+	              				<div class="col-lg-6">	 
+									<?php if(!empty($msg)){ ?>
+									<div id="status" class="alert alert-success alert-dismissible mt-2">
+										<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+										<span><?php echo $msg; ?>!</span>
+									</div>   
+									<?php } ?> 
+									<?php if(!empty($err)){ ?>
+									<div id="status" class="alert alert-danger alert-dismissible mt-2">
+										<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+										<span><?php echo $err; ?>!</span>
+									</div>   
+									<?php } ?>         					
 	              				</div>
 	              			</div>
 	              		</div>
 	              		<div class="box-body">
 	              			<!-- <h5 class="second_heading">Add Industry</h5> -->
+							<?php $payslip_type_id = $row->payroll_type;
+							list($payslip_type_name) = mysqli_fetch_row(mysqli_query($link,"select name from payslip_type_tbl where autoid='$payslip_type_id'")); ?>
                    <div class="row">
                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                    <div class="card">
@@ -75,12 +123,12 @@ $page = "salary_view"; ?>
                 </thead>
                 <tbody>
 				<tr>
-				<td><?php echo $row->payroll_type; ?></td>
+				<td><?php echo $payslip_type_name; ?></td>
 				<td><?php echo $row->salary_structure; ?></td>
 				</tr>
 				</tbody>
 				</table>
-  </div>
+  </div> 
 </div>
 </div>
 <!---  Panel End -->
@@ -107,21 +155,22 @@ $page = "salary_view"; ?>
 				 <?php
         $sel_rw2 = mysqli_query($link,"select * from allowance where emp_id='$emp_id'");
         while($row2 = mysqli_fetch_object($sel_rw2)){
+			$allowance_option_id = $row2->allowance_type;
+			list($allowance_option_name) = mysqli_fetch_row(mysqli_query($link,"select name from allowance_option_tbl where autoid='$allowance_option_id'")); 
         ?>
 								<tr>
 				<td><?php echo $row2->emp_name; ?></td>
-				<td><?php echo $row2->allowance_type; ?></td>
+				<td><?php echo $allowance_option_name; ?></td>
 				<td><?php echo $row2->title; ?></td>
 				<td><?php echo $row2->type; ?></td>
 				<td><?php echo $row2->amount; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+						
+						<button class="btn btn-sm btn-success edit_allowance" title="Edit Details" data-id="<?php echo $row2->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+
+						<a href="salary_singleview.php?del=allowance&id=<?php echo $row2->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row2->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row2->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -164,13 +213,11 @@ $page = "salary_view"; ?>
 				<td><?php echo $row3->type; ?></td>
 				<td><?php echo $row3->amount; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+				<button class="btn btn-sm btn-success edit_commission" title="Edit Details" data-id="<?php echo $row3->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+
+						<a href="salary_singleview.php?del=commission&id=<?php echo $row3->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -203,21 +250,22 @@ $page = "salary_view"; ?>
 				 <?php
         $sel_rw4 = mysqli_query($link,"select * from loan where emp_id='$emp_id'");
         while($row4 = mysqli_fetch_object($sel_rw4)){
+			$loan_option_id = $row4->loan_option;
+			list($loan_option_name) = mysqli_fetch_row(mysqli_query($link,"select name from loan_option_tbl where autoid='$loan_option_id'")); 
+
         ?>
 								<tr>
 				<td><?php echo $row4->emp_name; ?></td>
-				<td><?php echo $row4->loan_option; ?></td>
+				<td><?php echo $loan_option_name; ?></td>
 				<td><?php echo $row4->title; ?></td>
 				<td><?php echo $row4->type; ?></td>
 				<td><?php echo $row4->amount; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+				<button class="btn btn-sm btn-success edit_loan" title="Edit Details" data-id="<?php echo $row4->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+
+						<a href="salary_singleview.php?del=loan&id=<?php echo $row4->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -253,21 +301,21 @@ $page = "salary_view"; ?>
 				 <?php
         $com = mysqli_query($link,"select * from deduction where emp_id='$emp_id'");
         while($com3 = mysqli_fetch_object($com)){
+			$deduction_option_id = $com3->deduction_option;
+			list($deduction_option_name) = mysqli_fetch_row(mysqli_query($link,"select name from deduction_option_tbl where autoid='$deduction_option_id'")); 
+
         ?>
 								<tr>
 				<td><?php echo $com3->emp_name; ?></td>
-				<td><?php echo $com3->deduction_option; ?></td>
+				<td><?php echo $deduction_option_name; ?></td>
 				<td><?php echo $com3->title; ?></td>
 				<td><?php echo $com3->type; ?></td>
 				<td><?php echo $com3->amount; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+				<button class="btn btn-sm btn-success edit_deduction" title="Edit Details" data-id="<?php echo $com3->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+						<a href="salary_singleview.php?del=deduction&id=<?php echo $com3->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -306,13 +354,11 @@ $page = "salary_view"; ?>
 				<td><?php echo $other_row->type; ?></td>
 				<td><?php echo $other_row->amount; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+				<button class="btn btn-sm btn-success edit_other_payment" title="Edit Details" data-id="<?php echo $other_row->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+
+						<a href="salary_singleview.php?del=other_payment&id=<?php echo $other_row->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -356,13 +402,11 @@ $page = "salary_view"; ?>
 				<td><?php echo $over3->hours; ?></td>
 				<td><?php echo $over3->rate; ?></td>
 				<td>
-						<a href="#" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="#" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
+				<button class="btn btn-sm btn-success edit_overtime" title="Edit Details" data-id="<?php echo $over3->autoid; ?>"  type="button" ><i class="fa fa-edit"></i></button>
+
+						<a href="salary_singleview.php?del=overtime&id=<?php echo $over3->autoid; ?>&emp_id=<?php echo $_GET['emp_id']; ?>" class="btn btn-danger btn-sm" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
 					</td>
-					<!--<td>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&update=yes" class="btn btn-success" title="Edit Details"><i class="fa fa-edit"></i></a>
-						<a href="salary_singleview.php?emp_id=<?php echo $row3->emp_id; ?>&del=yes" class="btn btn-danger" title="Delete Details" onclick="return confirm('Are you sure want to delete?')"><i class="fa fa-trash"></i></a>
-					</td>-->
+					
 				</tr>
 				<?php
 		}
@@ -403,7 +447,10 @@ $page = "salary_view"; ?>
 			$("#type2 option[value='<?php echo $loan_row->type; ?>']").attr("selected", "selected");
 			$("#type3 option[value='<?php echo $deduction_row->type; ?>']").attr("selected", "selected");
 			$("#deduction_option option[value='<?php echo $deduction_row->deduction_option; ?>']").attr("selected", "selected");
+
+			
         });
     </script>
+	<script src="assets/js/employee.js"></script>
  
 </html>

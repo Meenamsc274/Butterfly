@@ -54,15 +54,17 @@ $emp_name=$row->name;
                 <div class="box">
                     <div class="box-header">
                       <div class="row">
-                        <div class="col-lg-6"><h3 class="box-heading"> Employee Salary Management <small>Add / Update  Details</small></h3></h3></div>
-                        <div class="col-lg-6">
-                          <div class="breadcrumb">
+                        <div class="col-lg-6"><h3 class="box-heading"> Employee Salary Management <small>Add / Update  Details</small>
+                        <div class="breadcrumb">
                             <a href="index.php" class="breadcrumb_a">Home</a> 
                             <i class="fa fa-angle-double-right angle_double_right"></i>
                             <a href="salary_view.php" class="breadcrumb_a">Employee Salary </a> 
                             <i class="fa fa-angle-double-right angle_double_right" aria-hidden="true"></i>
                             <a href="#" class="breadcrumb_a">Add / Update Employee Salary </a>
                           </div>
+                      </h3></h3></div>
+                        <div class="col-lg-6">
+                          
                         </div>
                       </div>
                     </div>
@@ -144,8 +146,13 @@ $emp_name=$row->name;
         </div>
         <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
           <select name="payroll_type" id="payroll_type" class="form-control">
-		  <option value="Monthly Payslip">Monthly Payslip</option>
-		  <option value="Hourly Payslip">Hourly Payslip</option>
+          <?php
+            $sel_rw1 = mysqli_query($link,"select * from payslip_type_tbl");
+            while($row_payslip = mysqli_fetch_object($sel_rw1)){ ?>
+
+            <option value="<?php echo $row_payslip->autoid ; ?>"><?php echo $row_payslip->name; ?></option>
+
+            <?php } ?>
 		  </select>
         </div>
       </div>

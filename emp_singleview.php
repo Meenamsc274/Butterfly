@@ -30,15 +30,16 @@ $page = "employee_view"; ?>
             		<div class="box">
 	              		<div class="box-header">
 	              			<div class="row">
-	              				<div class="col-lg-6"><h3 class="box-heading"> Employee <small> #<?php echo $row->emp_id; ?> View Details</small></h3> </div>
-	              				<div class="col-lg-6">
-								
-	              					<div class="breadcrumb">
-									<a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&update=yes" class="btn btn-success"style="font-size:10px;margin-right:9px"><i class="fa fa-pencil"></i></a> 
-                            			<a href="index.php" class="breadcrumb_a">Home</a> 
-                            			<i class="fa fa-angle-double-right angle_double_right"></i>
+	              				<div class="col-lg-6"><h3 class="box-heading"> Employee <small> #<?php echo $row->emp_id; ?> View Details</small>
+                          <div class="breadcrumb">
+                            <a href="index.php" class="breadcrumb_a">Home</a> 
+                            <i class="fa fa-angle-double-right angle_double_right"></i>
 		              					<a href="#" class="breadcrumb_a">Employee </a> 
 	              					</div>
+                      </h3> </div>
+	              				<div class="col-lg-6">
+                        <a href="employee_add.php?emp_id=<?php echo $row->emp_id; ?>&Update=yes" class="btn btn-success float-end margin-28"style="font-size:10px;margin-right:9px"><i class="fa fa-pencil"></i></a> 
+	              					
 	              				</div>
 	              			</div>
 	              		</div>
@@ -79,21 +80,30 @@ $page = "employee_view"; ?>
 </div>
 </div>
 <!---  Panel End -->
+
+<?php 
+  $branch_id = $row->branch;
+  $department_id = $row->department;
+  $designation_id = $row->designation;
+  list($branch_name) = mysqli_fetch_row(mysqli_query($link,"select branch_name from branch_tbl where branch_id ='$branch_id'"));
+  list($department_name) = mysqli_fetch_row(mysqli_query($link,"select department_name from department_tbl where department_id ='$department_id'"));
+  list($designation_name) = mysqli_fetch_row(mysqli_query($link,"select designation_name from designation_tbl where designation_id ='$designation_id'"));
+?>
 <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                    <div class="card card_box_shadow" >
   <div class="card-body">
     <h5 class="card-title">Company Detail</h5><hr/>
    <div class="row">
    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="card-text"><b>Branch</b> : <?php echo $row->branch; ?></p>
+                    <p class="card-text"><b>Branch</b> : <?php echo $branch_name; ?></p>
     
   </div>
    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                    <p class="card-text"><b>Department</b> : <?php echo $row->department; ?></p>
+                    <p class="card-text"><b>Department</b> : <?php echo $department_name; ?></p>
     
   </div>
    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                    <p class="card-text"><b>Designation</b> : <?php echo $row->designation; ?></p>
+                    <p class="card-text"><b>Designation</b> : <?php echo $designation_name; ?></p>
     
   </div>
    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">

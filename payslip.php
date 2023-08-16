@@ -35,63 +35,61 @@ mysqli_query($link,"UPDATE `payslip_tbl` SET `status`='Paid' WHERE `emp_id`='$em
   <body>
     <div class="page-wrapper"> <?php include 'assets/common/header.php';?> 
     	<section class="side-bar">
-        	<div class="row"> <?php include 'assets/common/left-sidebar.php';?> <div class="col-lg-10">
-            	
+        	<div class="row"> <?php include 'assets/common/left-sidebar.php';?> 
+			<div class="col-lg-10">
+	            <div class="container box-bg">
+            		<div class="box">
+					<div class="box-header">
 	              			<div class="row">
-							<div class="col-lg-12">
-								<h4>Payslip</h4>
-	              					<div class="breadcrumb" style="float:left;margin-top:5px">
-									<a href="index.php" class="breadcrumb_a">Home</a> 
+	              				<div class="col-lg-6">
+                                    <h3 class="box-heading"> Payslip
+                                    <div class="breadcrumb">
+	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Employee Salary </a> 
+		              					<a href="#" class="breadcrumb_a">Payslip </a> 
 	              					</div>
-	              				</div>
-	              				</div>
-				<div class="container box-bg">
-            		<div class="box">
-					<div class="box-body">
-					 <form action="" method="post" class="padding-10" enctype="multipart/form-data">
-					 
-					 <div class="row">
-					 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
-					 <select name="month" id="month" class="form-control">
-		  <option value="01">JAN</option>
-		  <option value="02">FEB</option>
-		  <option value="03">MAR</option>
-		  <option value="04">APR</option>
-		  <option value="05">MAY</option>
-		  <option value="06">JUN</option>
-		  <option value="07">JUL</option>
-		  <option value="08">AUG</option>
-		  <option value="09">SEP</option>
-		  <option value="10">OCT</option>
-		  <option value="11">NOV</option>
-		  <option value="12">DEC</option>
-		  </select></div>
-					 <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 no-pad">
-		  <select name="year" id="year" class="form-control">
-		  <?php
-		  for($i=2023;$i<=2050;$i++)
-		  {			  
-		  ?>
-		  <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-		  <?php
-		  }
-		  ?>
-		  </select>
-		  </div>
-		   <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 no-pad">
-		  <input type="submit" name="submit1" id="submit" class="btn btn-success" value="Generate Payslip">
-					 </div>
-					 </div>
-     
-					 </form>
-					</div>
-					</div>
-					</div>
-	              		<div class="container box-bg">
-            		<div class="box">
-	              		
+                                </div>
+                                    </h3> 
+                                  
+	              			</div>
+	              		</div>
+						  <div class="box-body">
+						  <form method="post">
+                        <div class="form-group row form_box_shadow">
+                          
+                          <div class="col-lg-12 row">
+                            
+                            <div class="col-lg-2 offset-lg-6">
+                              <label>Select Month</label>
+								<select name="month" id="month" class="form-control">
+									<option value="01">JAN</option>
+									<option value="02">FEB</option>
+									<option value="03">MAR</option>
+									<option value="04">APR</option>
+									<option value="05">MAY</option>
+									<option value="06">JUN</option>
+									<option value="07">JUL</option>
+									<option value="08">AUG</option>
+									<option value="09">SEP</option>
+									<option value="10">OCT</option>
+									<option value="11">NOV</option>
+									<option value="12">DEC</option>
+								</select>
+                            </div>
+                            <div class="col-lg-2">
+                              	<label>Select Year</label>
+                              	<select name="year" id="year" class="form-control">
+									<?php for($i=2023;$i<=2050;$i++){ ?>
+									<option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+									<?php } ?>
+								</select>
+                            </div>
+                            <div class="col-lg-2">
+							<input type="submit" name="submit1" id="submit" class="btn bg-default margin_top_40" value="Generate Payslip"></div>
+                          </div>
+                          
+                        </div>
+                        </form>
 	    <?php
 if($_POST['submit1'] == "Generate Payslip"){
 $month = mysqli_real_escape_string($link,$_POST['month']);
@@ -103,9 +101,10 @@ else{
 	$year =date('Y');
 }
 $day=$year."-".$month;
-?>          		<div class="box-body">
+?>          		
+
 						<form action="<?php echo $_SERVER["PHP_SELF"]; ?>?day=<?php echo $day; ?>" method="post">					
-						<button id="export_data" name='export_data' value="Export to excel" class="btn btn-success" style="float:right;margin:15px!important;">Export</button><br/><br>
+						<button id="export_data" name='export_data' value="Export to excel" class="btn bg-default" style="float:right;margin:15px!important;">Export</button><br/><br>
 	              			</form>
 							<!-- <h5 class="second_heading">Add Industry</h5> -->
                     <form action="" method="post" class="padding-10" enctype="multipart/form-data">

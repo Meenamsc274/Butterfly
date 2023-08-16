@@ -3,7 +3,7 @@ include 'dbc.php';
 page_protect();
 $created_by = $_SESSION['userid'];
 $approved_by = "";
-$page = "payslip_type"; ?>
+$page = "allowance_option"; ?>
 <?php 
 
 if(isset($_POST['submit'])){
@@ -12,7 +12,7 @@ if(isset($_POST['submit'])){
         $autoid = mysqli_real_escape_string($link,$_POST['autoid']);
         $name  = mysqli_real_escape_string($link,$_POST['name']);
        
-        if(mysqli_query($link,"INSERT INTO `payslip_type_tbl` ( `autoid`, `name`, `date`, `created_by`, `approved_by`) VALUES ( '$autoid', '$name', NOW(), '$created_by', '$approved_by')")){
+        if(mysqli_query($link,"INSERT INTO `allowance_option_tbl` ( `autoid`, `name`, `date`, `created_by`, `approved_by`) VALUES ( '$autoid', '$name', NOW(), '$created_by', '$approved_by')")){
             $msg[] = "Successfully Saved!";
             
         }
@@ -28,7 +28,7 @@ if(isset($_POST['submit'])){
         $name = mysqli_real_escape_string($link,$_POST['name']);
        
 
-        if(mysqli_query($link,"update `payslip_type_tbl` set `name`='$name',  `date`= NOW(), `created_by`='$created_by', `approved_by`='$approved_by' where autoid = '$autoid'")){
+        if(mysqli_query($link,"update `allowance_option_tbl` set `name`='$name',  `date`= NOW(), `created_by`='$created_by', `approved_by`='$approved_by' where autoid = '$autoid'")){
             $msg[] = "Successfully Updated!";
         }
         else
@@ -41,7 +41,7 @@ if(isset($_POST['submit'])){
 
 if($_GET['del'] == "yes"){
 	$autoid=$_GET['autoid'];
-    if(mysqli_query($link,"delete from `payslip_type_tbl` where `autoid`='$autoid'")){
+    if(mysqli_query($link,"delete from `allowance_option_tbl` where `autoid`='$autoid'")){
 		$msg[] = "Successfully Deleted!";
 	}
 	else
@@ -71,11 +71,11 @@ if($_GET['del'] == "yes"){
 	              		<div class="box-header">
 	              			<div class="row">
 	              				<div class="col-lg-6">
-                                    <h3 class="box-heading">Manage Payslip Type
+                                    <h3 class="box-heading">Manage Allowance Option
                                     <div class="breadcrumb">
 	              						<a href="index.php" class="breadcrumb_a">Home</a> 
                             			<i class="fa fa-angle-double-right angle_double_right"></i>
-		              					<a href="#" class="breadcrumb_a">Payslip Type </a> 
+		              					<a href="#" class="breadcrumb_a">Allowance Option </a> 
 	              					</div>
                                 </div>
                                     </h3> 
@@ -101,13 +101,13 @@ if($_GET['del'] == "yes"){
                                             <thead>
                                                 <tr>
                                                     <th>S.No</th>
-                                                    <th> Payslip Type </th>
+                                                    <th> Allowance Option </th>
                                                     <th>Actions</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <?php $i=1;
-                                                $sel_rw = mysqli_query($link,"select * from payslip_type_tbl");
+                                                $sel_rw = mysqli_query($link,"select * from allowance_option_tbl");
                                                 while($row = mysqli_fetch_object($sel_rw)){   ?>
 
                                                 <tr>
@@ -138,23 +138,23 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Create New Payslip Type</h4>
+                        <h4 class="modal-title">Create New Allowance Option</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form method="post" action="payslip_type.php" class="padding-10" enctype="multipart/form-data">
-                        <?php   $max_id = maxOfAll("id","payslip_type_tbl");
+                    <form method="post" action="allowance_option.php" class="padding-10" enctype="multipart/form-data">
+                        <?php   $max_id = maxOfAll("id","allowance_option_tbl");
                                 $max_id=$max_id+1;
-                                $upload_id="PT-".$max_id;
+                                $upload_id="AT-".$max_id;
                          ?>
                         <div class="row">
                        
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
                                 <div class="form-group row">
                                     <label  for="industry_id">Name</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Enter Payslip Type Name" required>
+                                    <input type="text" name="name" class="form-control" placeholder="Enter Allowance Option Name" required>
                                     <input type="hidden" name="autoid" value="<?php echo $upload_id; ?>">
                                 </div>
                             </div>    
@@ -182,19 +182,19 @@ if($_GET['del'] == "yes"){
 
                     <!-- Modal Header -->
                     <div class="modal-header">
-                        <h4 class="modal-title">Edit Payslip Type</h4>
+                        <h4 class="modal-title">Edit Allowance Option</h4>
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
 
                     <!-- Modal body -->
                     <div class="modal-body">
-                    <form method="post" action="payslip_type.php" class="padding-10" enctype="multipart/form-data">
+                    <form method="post" action="allowance_option.php" class="padding-10" enctype="multipart/form-data">
                        
                         <div class="row">
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
                             <div class="form-group row">
                             <label  for="industry_id">Name</label>
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Payslip Type Name" required>
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Enter Allowance Option Name" required>
 
                                 <input type="hidden" name="autoid" id="autoid" class="autoid">
                             </div>
@@ -228,7 +228,7 @@ if($_GET['del'] == "yes"){
             $('.edit').click(function(){
                 var id_name = $(this).attr("id");
                 var id = id_name.substr(4);
-                var url = 'ajax_request/get_payslipType.php';
+                var url = 'ajax_request/get_allowanceOption.php';
                 $.ajax({
                     url : url,
                     type: "POST",

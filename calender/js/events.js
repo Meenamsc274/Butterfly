@@ -2,7 +2,7 @@
 	"use strict";
 	var today = new Date();
 	var dd = String(today.getDate()).padStart(2, '0');
-	var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+	var mm = String(today.getMonth()).padStart(2, '0'); //January is 0!
 	var yyyy = today.getFullYear();
 
 	today = yyyy + '-' + dd + '-' + mm;
@@ -12,7 +12,7 @@
 		view: 'month',
 		tmpl_path: 'tmpls/',
 		tmpl_cache: false,
-		day: today,
+		day: '2023-08-14',
 		onAfterEventsLoad: function(events) {
 			if(!events) {
 				return;

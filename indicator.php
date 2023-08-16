@@ -104,9 +104,11 @@ $page = "indicator"; ?>
 		<td><?php echo $row5->added_by; ?></td>
 		<td><?php echo $row5->created_at; ?></td>
 		<td>
-		<a href="indicator_view.php?emp_id=<?php echo $row5->autoid; ?>" title="View Details" class="btn btn-info"><i class="fa fa-eye"></i></a>				
-		<!--<a href="#" title="Edit Details" class="btn btn-success"><i class="fa fa-edit"></i></a>	-->			
-		<a href="indicator.php?emp_id=<?php echo $row5->autoid; ?>&del=yes" title="Delete Details" class="btn btn-danger" onClick="return confirm('Are you sure want to delete?');"><i class="fa fa-trash"></i></a>				
+		<a href="indicator_view.php?emp_id=<?php echo $row5->autoid; ?>" title="View Details" class="btn btn-info btn-sm"><i class="fa fa-eye"></i></a>				
+		
+		<button class="btn btn-sm btn-success edit" data-id="<?php echo $row->autoid; ?>"  type="button" data-bs-toggle="modal" data-bs-target="#myModalEdit"><i class="fa fa-edit"></i></button>
+		
+		<a href="indicator.php?emp_id=<?php echo $row5->autoid; ?>&del=yes" title="Delete Details" class="btn btn-danger btn-sm" onClick="return confirm('Are you sure want to delete?');"><i class="fa fa-trash"></i></a>				
 		</td>
 		</tr>
 		<?php
@@ -118,6 +120,111 @@ $page = "indicator"; ?>
 	              	</div>
             	</div>
           	</div>
+			<div class="modal" id="myModalEdit">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Edit Leave</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body">
+                    <form method="post" class="padding-10" enctype="multipart/form-data">
+                       
+                        <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
+                    <div class="form-group row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
+                        <label class="margin-left-10" for="industry_name">Employee </label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
+                            <select name="employee" class="form-control" id="employee" required>
+                                <option value="">Select Employee</option>
+                                <?php $sel_emp = mysqli_query($link,"select emp_id,name from employee"); 
+                                while($fet_emp = mysqli_fetch_object($sel_emp)){
+                                    ?><option value="<?php echo $fet_emp->emp_id; ?>"><?php echo $fet_emp->name; ?></option><?php
+                                } ?>
+                                
+                            </select>
+                            <input type="hidden" class="autoid" name="autoid" id="autoid">
+                        </div>
+                    </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
+                    <div class="form-group row">
+                        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
+                        <label class="margin-left-10" for="industry_id">Leave Type</label>
+                        </div>
+                        <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
+                            <select name="leave_type" id="leave_type" class="form-control">
+                                <option value="">Select Leave Type</option>
+                                <option value="Casual Leave (6)">Casual Leave (6)</option>
+                                <option value="Medical Leave (10)">Medical Leave (10)</option>
+                            </select>
+                        </div>
+                    </div>
+                    </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
+                            <div class="form-group row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
+                                <label class="margin-left-10" for="industry_id">Start Date</label>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
+                                <input type="date" id="start_date" name="start_date"  class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 no-pad">
+                            <div class="form-group row">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 no-pad">
+                                <label class="margin-left-10" for="industry_id">End Date</label>
+                                </div>
+                                <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 no-pad">
+                                <input type="date" id="end_date" name="end_date" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
+                            <div class="form-group row">
+                                <div class="col-lg-2 col-md-4 col-sm-12 col-xs-12 no-pad">
+                                <label class="margin-left-10" for="industry_id">Leave Reason</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 no-pad">
+                                    <textarea rows="5" id="leave_reason" name="leave_reason" placeholder="Leave Reason" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-pad">
+                            <div class="form-group row">
+                                <div class="col-lg-2 col-md-2 col-sm-12 col-xs-12 no-pad">
+                                    <label class="margin-left-10" for="industry_id">Remark</label>
+                                </div>
+                                <div class="col-lg-10 col-md-10 col-sm-12 col-xs-12 no-pad">
+                                    <textarea name="remark" id="remark" rows="5" placeholder="Leave Remark" class="form-control"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        
+                    <input type="submit" name="submit" id="submit" class="btn btn-success float-right" value="Update">
+                    </form>
+                    
+                    </div>
+
+                    </div>
+                </div>
+            </div>  
       	</section>
       <!--body content end--> <?php include 'assets/common/footer.php';?>
     </div>

@@ -90,12 +90,14 @@ $page = "salary_view"; ?>
 			
 			$amt = $row->salary_structure + $al_row->amt + $com_row->amt - $deduction_row->amt + $other_row->amt + $all_amt - $loan_row->amt;
 			
+			$payslip_type_id = $row->payroll_type;
+			list($payslip_type_name) = mysqli_fetch_row(mysqli_query($link,"select name from payslip_type_tbl where autoid='$payslip_type_id'"));
         ?>
 
                 <tr>
 					<td><a href="salary_singleview.php?emp_id=<?php echo $row->employee_id; ?>" class="border border-success text-success p-2 rounded" >#<?php echo $row->employee_id; ?></a></td>
 					<td><?php echo $row->employee_name; ?></td>
-					<td><?php echo $row->payroll_type; ?></td>
+					<td><?php echo $payslip_type_name; ?></td>
 					<td><?php echo $row->salary_structure; ?></td>
 					<td><?php echo $amt; ?></td>
 					<td>
